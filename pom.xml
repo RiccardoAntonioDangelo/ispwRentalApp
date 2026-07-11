@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ispw</groupId>
-    <artifactId>ISPW</artifactId>
+    <artifactId>ispwRentalApp</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -13,8 +13,12 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <javafx.version>21.0.2</javafx.version>
-        <sonar.organization>riccardoantoniodangelo-1</sonar.organization>
         <mysql.version>8.0.33</mysql.version>
+
+        <!-- SonarCloud -->
+        <sonar.organization>riccardoantoniodangelo-1</sonar.organization>
+        <sonar.projectKey>RiccardoAntonioDangelo_ispwRentalApp</sonar.projectKey>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
@@ -38,9 +42,7 @@
             <scope>runtime</scope>
         </dependency>
 
-
-
-        <!-- Altre Utility -->
+        <!-- Utility -->
         <dependency>
             <groupId>com.esotericsoftware</groupId>
             <artifactId>kryo</artifactId>
@@ -48,12 +50,6 @@
         </dependency>
 
         <!-- Test -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -80,6 +76,11 @@
                 <configuration>
                     <mainClass>com.ispw.HelloApplication</mainClass>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>5.7.0.6970</version>
             </plugin>
         </plugins>
     </build>
