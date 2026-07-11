@@ -8,18 +8,17 @@ on:
 jobs:
   build:
     name: Build and analyze
-    # Cambiato da ubuntu-latest a windows-latest per usare macchine Windows
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Disabilita lo shallow clone richiesto da SonarQube
+          fetch-depth: 0
 
-      - name: Set up JDK 25
+      - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
-          java-version: '25' # Impostato su Java 25 (puoi mettere '21' se preferisci l'SDK 21)
-          distribution: 'zulu'
+          java-version: '21'
+          distribution: 'temurin' # Configurato per Eclipse Temurin
 
       - name: Cache SonarQube packages
         uses: actions/cache@v4
@@ -38,6 +37,4 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        # Su Windows, GitHub Actions usa PowerShell di default.
-        # Il comando Maven rimane lo stesso ma viene eseguito nell'ambiente Windows.
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=RiccardoAntonioDangelo_ispwRentalApp
