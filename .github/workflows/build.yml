@@ -37,8 +37,5 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          mvn -B -e verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar `
-            -DargLine="--add-opens java.base/java.time=com.fasterxml.jackson.databind" `
-            -Dsonar.projectKey=RiccardoAntonioDangelo_ISPW `
-            -Dsonar.host.url=https://sonarcloud.io
+        # Comando unito su una sola riga isolato da singoli apici per evitare conflitti di stringhe su Windows
+        run: 'mvn -B -e verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -DargLine="--add-opens java.base/java.time=com.fasterxml.jackson.databind" -Dsonar.projectKey=RiccardoAntonioDangelo_ISPW -Dsonar.host.url=https://sonarcloud.io'
