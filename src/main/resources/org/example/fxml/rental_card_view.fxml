@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="cardRoot"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://fxml.com/fxml"
+      fx:controller="org.example.view.javafx.componet.RentalCardGC"
+      spacing="15"
+      styleClass="bg-surface, rounded-lg, border-all">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <VBox spacing="5">
+            <Label fx:id="prodLabel" styleClass="size-16, font-bold, text-hi"/>
+            <Label fx:id="idLabel" styleClass="size-12, text-lo"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="statusBadge" styleClass="bg-primary-soft, text-primary, size-12, font-bold, rounded-sm">
+            <padding>
+                <Insets top="4" right="10" bottom="4" left="10"/>
+            </padding>
+        </Label>
+    </HBox>
+
+    <HBox spacing="20">
+        <VBox spacing="2">
+            <Label fx:id="fromTitleLabel" styleClass="size-11, text-lo"/>
+            <Label fx:id="fromValueLabel" styleClass="size-13, font-bold, text-hi"/>
+        </VBox>
+        <VBox spacing="2">
+            <Label fx:id="toTitleLabel" styleClass="size-11, text-lo"/>
+            <Label fx:id="toValueLabel" styleClass="size-13, font-bold, text-hi"/>
+        </VBox>
+    </HBox>
+
+    <Separator/>
+
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <Button fx:id="acceptBtn" prefWidth="120" styleClass="btn-primary" onAction="#handleAccept"/>
+        <Button fx:id="rejectBtn" prefWidth="120" styleClass="btn-breadcrumb" onAction="#handleReject"/>
+        <Button fx:id="cancelBtn" prefWidth="120" styleClass="btn-breadcrumb" onAction="#handleCancel"/>
+        <Button fx:id="payBtn" prefWidth="120" styleClass="btn-breadcrumb" onAction="#handlePay"/>
+        <Button fx:id="magicBtn" prefWidth="120" styleClass="btn-breadcrumb" onAction="#handleMagic"/>
+    </HBox>
+</VBox>

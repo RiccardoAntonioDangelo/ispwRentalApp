@@ -1,0 +1,18 @@
+/* ==========================================================================
+   MAIN STYLE ENTRY POINT (Design System Architecture)
+   ========================================================================== */
+
+/* 1. Base Layer (Tokens, Themes & Utilities) */
+@import "css/base/variables.css";
+@import "css/base/themes.css";
+@import "css/base/typography.css";
+@import "css/base/utilities.css";
+
+/* 2. Component Layer */
+@import "css/components/buttons.css";
+@import "css/components/cards.css";
+
+/* 3. Global Reset - In JavaFX si usa .root, non .root senza punto o con macro strane */
+.root {
+    -fx-background-color: -color-bg;
+}

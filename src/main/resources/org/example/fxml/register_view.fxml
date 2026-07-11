@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="mainContainer" spacing="20.0" prefWidth="500.0" prefHeight="740.0"
+      alignment="TOP_CENTER"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+
+>
+
+    <padding>
+        <Insets top="35.0" right="35.0" bottom="35.0" left="35.0"/>
+    </padding>
+
+    <VBox spacing="25.0" styleClass="bg-surface, rounded-lg, border-all">
+        <padding>
+            <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+        </padding>
+
+        <VBox spacing="5.0">
+            <HBox alignment="CENTER_LEFT">
+                <Label fx:id="titleLabel" styleClass="size-24, font-bold, text-hi"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="closeBtn" onAction="#handleClose" styleClass="btn-breadcrumb"/>
+            </HBox>
+            <Label fx:id="subtitleLabel" styleClass="size-14, text-lo"/>
+        </VBox>
+
+        <VBox spacing="12.0">
+            <Label fx:id="roleLabel" styleClass="size-14, font-bold, text-hi"/>
+
+            <VBox fx:id="rolesContainer" spacing="12.0" />
+        </VBox>
+
+        <VBox spacing="15.0">
+            <VBox spacing="5.0">
+                <Label fx:id="emailLabel" styleClass="size-13, font-bold, text-hi"/>
+                <TextField fx:id="emailField" styleClass="bg-bg, border-all, rounded-md, h-40"/>
+            </VBox>
+            <VBox spacing="5.0">
+                <Label fx:id="passLabel" styleClass="size-13, font-bold, text-hi"/>
+                <PasswordField fx:id="passwordField" styleClass="bg-bg, border-all, rounded-md, h-40"/>
+            </VBox>
+            <VBox spacing="5.0">
+                <Label fx:id="confirmPassLabel" styleClass="size-13, font-bold, text-hi"/>
+                <PasswordField fx:id="confirmPasswordField" styleClass="bg-bg, border-all, rounded-md, h-40"/>
+            </VBox>
+        </VBox>
+
+        <VBox spacing="15.0" alignment="CENTER">
+            <Label fx:id="demoLabel" styleClass="size-12, text-lo"/>
+            <Button fx:id="signupBtn" onAction="#handleSignup" maxWidth="Infinity" prefHeight="45.0" styleClass="btn-primary"/>
+        </VBox>
+    </VBox>
+</VBox>

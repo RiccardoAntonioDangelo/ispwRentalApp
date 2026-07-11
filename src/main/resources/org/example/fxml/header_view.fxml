@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="bg-surface, border-bottom, h-80">
+        <padding>
+            <Insets bottom="15.0" left="40.0" right="40.0" top="15.0" />
+        </padding>
+
+        <HBox alignment="CENTER_LEFT" spacing="12.0">
+            <StackPane styleClass="bg-primary-soft, rounded-md, logo-box-size">
+                <Label fx:id="logoEmoji" styleClass="size-20, text-accent" />
+            </StackPane>
+            <VBox spacing="0.0">
+                <Label fx:id="logoTitle" styleClass="size-18, font-bold, text-hi" />
+                <Label fx:id="logoSubtitle" styleClass="size-12, text-lo" />
+            </VBox>
+        </HBox>
+
+        <Region HBox.hgrow="ALWAYS" />
+
+        <HBox fx:id="headerButtonsContainer" alignment="CENTER_RIGHT" spacing="10.0">
+            <Button fx:id="settingsBtn" onAction="#handleSettings" styleClass="btn-breadcrumb" />
+        </HBox>
+    </HBox>
+
+    <HBox fx:id="breadcrumbContainer" alignment="CENTER_LEFT" spacing="8.0" styleClass="bg-bg, border-bottom">
+        <padding>
+            <Insets bottom="8.0" left="40.0" right="40.0" top="8.0" />
+        </padding>
+        <Label fx:id="homeIcon" styleClass="text-accent, size-20" />
+    </HBox>
+</VBox>

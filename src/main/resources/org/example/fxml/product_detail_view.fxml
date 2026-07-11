@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            styleClass="bg-bg">
+    <VBox alignment="TOP_CENTER" spacing="0" styleClass="bg-bg">
+        <padding>
+            <Insets top="20.0" bottom="40.0"/>
+        </padding>
+
+        <HBox spacing="40.0" maxWidth="1200.0" alignment="TOP_CENTER" styleClass="bg-bg">
+
+            <!-- Left Column: Image and Specs -->
+            <VBox spacing="25.0" prefWidth="750.0">
+                <StackPane fx:id="imageContainer" prefHeight="450.0" styleClass="bg-surface, rounded-lg, border-all">
+                    <Label text="📷" styleClass="size-48, text-lo" opacity="0.3"/>
+                </StackPane>
+
+                <VBox spacing="15.0" styleClass="bg-surface, rounded-lg, border-all">
+                    <padding><Insets top="25.0" right="25.0" bottom="25.0" left="25.0"/></padding>
+                    <Label fx:id="specsTitleLabel" styleClass="size-16, font-bold, text-hi"/>
+                    <VBox fx:id="specsList" spacing="10.0"/>
+                </VBox>
+            </VBox>
+
+            <!-- Right Column: Info and Booking -->
+            <VBox spacing="20.0" prefWidth="400.0">
+                <VBox spacing="10.0">
+                    <Label fx:id="titleLabel" styleClass="size-24, font-bold, text-hi" wrapText="true"/>
+                    <Label fx:id="subtitleLabel" styleClass="size-16, text-lo"/>
+                    <HBox spacing="8.0" alignment="BASELINE_LEFT">
+                        <Label fx:id="priceValueLabel" styleClass="size-20, font-bold, text-hi"/>
+                        <Label fx:id="priceUnitLabel" styleClass="size-14, text-lo"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Warranty Box -->
+                <VBox spacing="10.0" styleClass="bg-primary-soft, rounded-md, border-all">
+                    <padding><Insets top="15.0" right="15.0" bottom="15.0" left="15.0"/></padding>
+                    <Label fx:id="warrantyTitleLabel" styleClass="size-14, font-bold, text-primary"/>
+                    <Label fx:id="warrantyDescLabel" styleClass="size-13, text-hi" wrapText="true"/>
+                </VBox>
+
+                <!-- Conditions Card -->
+                <VBox spacing="15.0" styleClass="bg-surface, rounded-lg, border-all">
+                    <padding><Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/></padding>
+                    <Label fx:id="conditionsTitleLabel" styleClass="size-14, font-bold, text-hi"/>
+                    <VBox fx:id="conditionsList" spacing="8.0"/>
+                </VBox>
+
+                <!-- Booking Card -->
+                <VBox spacing="20.0" styleClass="bg-surface, rounded-lg, border-all">
+                    <padding><Insets top="25.0" right="25.0" bottom="25.0" left="25.0"/></padding>
+                    <HBox alignment="CENTER_LEFT">
+                        <Label fx:id="bookingEstLabel" styleClass="size-12, text-lo"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="discountTag" styleClass="bg-primary, text-white, size-11, font-bold, rounded-sm">
+                            <padding><Insets top="2.0" right="6.0" bottom="2.0" left="6.0"/></padding>
+                        </Label>
+                    </HBox>
+                    <Label fx:id="totalPriceLabel" styleClass="size-24, font-bold, text-hi"/>
+                    <Button fx:id="bookBtn" onAction="#handleBooking" maxWidth="Infinity" prefHeight="50.0" styleClass="btn-primary"/>
+                </VBox>
+            </VBox>
+
+        </HBox>
+    </VBox>
+</ScrollPane>

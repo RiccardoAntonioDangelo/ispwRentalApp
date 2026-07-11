@@ -1,0 +1,55 @@
+/* ==========================================================================
+   BUTTONS & INTERACTIVE ELEMENTS
+   ========================================================================== */
+
+/* --- Card Action Button (START) --- */
+.card-button {
+    -fx-background-color: -color-dark;
+    -fx-text-fill: -btn-txt;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12px;
+    -fx-padding: 12 35;
+    -fx-cursor: hand;
+}
+.card-button:hover { -fx-opacity: 0.9; -fx-translate-y: -1; }
+
+/* --- Breadcrumb Steps (Ghost Style) ---fx-background-color: transparent; */
+.btn-breadcrumb {
+     -fx-background-color: -color-dark;
+        -fx-text-fill: -btn-txt;
+        -fx-font-weight: bold;
+        -fx-background-radius: 12px;
+        -fx-cursor: hand;
+}
+.btn-breadcrumb:hover {
+    -fx-opacity: 0.9; -fx-translate-y: -1;
+}
+
+/* --- Breadcrumb Active State (Not a button, but related) --- */
+.breadcrumb-active {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-primary;
+}
+
+/* --- Primary utility Button --- */
+.btn-primary {
+    -fx-background-color: -color-primary;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 10 24;
+    -fx-cursor: hand;
+}
+
+/* --- Ghost utility Button --- */
+.btn-ghost {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-txt-md;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+.btn-ghost:hover {
+    -fx-background-color: -color-primary-soft;
+    -fx-text-fill: -color-primary;
+}

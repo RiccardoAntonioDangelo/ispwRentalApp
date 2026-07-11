@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="mainContainer" spacing="20.0" prefWidth="850.0" prefHeight="650.0"
+      alignment="TOP_CENTER"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+
+    <padding>
+        <Insets top="25.0" right="35.0" bottom="25.0" left="35.0"/>
+    </padding>
+
+    <VBox spacing="20.0" styleClass="bg-surface, rounded-lg, border-all" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="25.0" right="30.0" bottom="25.0" left="30.0"/>
+        </padding>
+
+        <HBox spacing="30.0" VBox.vgrow="ALWAYS">
+
+            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                <Label fx:id="personalTitleLabel" styleClass="size-18, font-bold, text-hi"/>
+
+                <HBox spacing="15.0">
+                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                        <Label fx:id="nameLabel" styleClass="size-13, font-bold, text-hi"/>
+                        <TextField fx:id="nameField" styleClass="bg-bg, border-all, rounded-md, h-40" style="-fx-text-fill: -color-txt-hi;"/>
+                    </VBox>
+                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                        <Label fx:id="surnameLabel" styleClass="size-13, font-bold, text-hi"/>
+                        <TextField fx:id="surnameField" styleClass="bg-bg, border-all, rounded-md, h-40" style="-fx-text-fill: -color-txt-hi;"/>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="5.0">
+                    <Label fx:id="emailLabel" styleClass="size-13, font-bold, text-hi"/>
+                    <TextField fx:id="emailField" styleClass="bg-bg, border-all, rounded-md, h-40" style="-fx-text-fill: -color-txt-hi;"/>
+                </VBox>
+
+                <HBox spacing="15.0">
+                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                        <Label fx:id="phoneLabel" styleClass="size-13, font-bold, text-hi"/>
+                        <TextField fx:id="phoneField" styleClass="bg-bg, border-all, rounded-md, h-40" style="-fx-text-fill: -color-txt-hi;"/>
+                    </VBox>
+                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                        <Label fx:id="pickupLabel" styleClass="size-13, font-bold, text-hi"/>
+                        <TextField fx:id="pickupField" styleClass="bg-bg, border-all, rounded-md, h-40" style="-fx-text-fill: -color-txt-hi;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <Separator orientation="VERTICAL"/>
+
+            <VBox spacing="20.0" prefWidth="320.0">
+
+                <VBox spacing="10.0" styleClass="bg-bg, rounded-md" style="-fx-padding: 15;">
+                    <Label fx:id="periodTitleLabel" styleClass="size-16, font-bold, text-hi"/>
+
+                    <VBox spacing="12.0">
+                        <VBox spacing="5.0">
+                            <Label fx:id="startDateLabel" styleClass="size-13, font-bold, text-hi"/>
+                            <DatePicker fx:id="startDatePicker" maxWidth="Infinity"
+                                        styleClass="bg-bg, border-all, rounded-md, h-40"
+                                        style=".text-input { -fx-background-color: transparent; -fx-text-fill: -color-txt-hi; }"/>
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <Label fx:id="endDateLabel" styleClass="size-13, font-bold, text-hi"/>
+                            <DatePicker fx:id="endDatePicker" maxWidth="Infinity"
+                                        styleClass="bg-bg, border-all, rounded-md, h-40"
+                                        style=".text-input { -fx-background-color: transparent; -fx-text-fill: -color-txt-hi; }"/>
+                        </VBox>
+                    </VBox>
+                </VBox>
+
+                <VBox spacing="15.0" styleClass="bg-bg, rounded-md" style="-fx-padding: 15;" VBox.vgrow="ALWAYS">
+                    <Label fx:id="summaryTitleLabel" styleClass="size-16, font-bold, text-hi"/>
+
+                    <GridPane vgap="12.0" hgap="10.0" VBox.vgrow="ALWAYS">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" halignment="RIGHT" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+
+                        <Label fx:id="summaryItemLabel" styleClass="size-13, text-lo" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <Label fx:id="summaryItemVal" styleClass="size-13, font-bold, text-hi" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label fx:id="summaryDailyPriceLabel" styleClass="size-13, text-lo" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Label fx:id="summaryDailyPriceVal" styleClass="size-13, font-bold, text-hi" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label fx:id="summaryDurationLabel" styleClass="size-13, text-lo" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <Label fx:id="summaryDurationVal" styleClass="size-13, font-bold, text-hi" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label fx:id="summarySubtotalLabel" styleClass="size-13, text-lo" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <Label fx:id="summarySubtotalVal" styleClass="size-13, font-bold, text-hi" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <Label fx:id="summaryTotalLabel" styleClass="size-14, font-bold, text-hi" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <Label fx:id="summaryTotalVal" styleClass="size-16, font-bold, text-primary" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </VBox>
+            </VBox>
+        </HBox>
+
+        <Region VBox.vgrow="ALWAYS" />
+
+        <VBox alignment="CENTER">
+            <Button fx:id="submitBtn" onAction="#handleSubmit" maxWidth="Infinity" prefHeight="45.0" styleClass="btn-primary"/>
+        </VBox>
+    </VBox>
+</VBox>

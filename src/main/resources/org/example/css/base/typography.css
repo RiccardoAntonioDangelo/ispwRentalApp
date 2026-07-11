@@ -1,0 +1,76 @@
+/* ==========================================================================
+   TYPOGRAPHY & GLOBAL STYLES
+   ========================================================================== */
+
+.root {
+    -fx-font-family: "Segoe UI", "Inter", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: -color-txt-md;
+}
+
+/* --- Brand Typography --- */
+.logo-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-txt-hi;
+}
+
+.logo-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-txt-lo;
+}
+
+/* --- View Headers --- */
+.text-h1 {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-txt-hi;
+}
+
+.text-h2 {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-txt-hi;
+}
+
+.text-muted {
+    -fx-text-fill: -color-txt-lo;
+}
+
+/* --- Card Typography --- */
+.card-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-txt-hi;
+}
+
+.welcome-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-txt-hi;
+}
+
+.welcome-subtitle {
+    -fx-font-size: 15px;
+    -fx-text-fill: -color-txt-lo;
+    -fx-line-spacing: 5px;
+}
+
+
+/* --- 2. TEXT COLORS --- */
+.text-hi     { -fx-text-fill: -color-txt-hi; }
+.text-lo     { -fx-text-fill: -color-txt-lo; }
+.text-accent { -fx-text-fill: -color-primary; }
+.text-white  { -fx-text-fill: white; }
+
+/* --- 3. TYPOGRAPHY (Size & Weight) --- */
+.font-bold { -fx-font-weight: bold; }
+
+.size-12 { -fx-font-size: 12px; }
+.size-13 { -fx-font-size: 13px; }
+.size-14 { -fx-font-size: 14px; }
+.size-18 { -fx-font-size: 18px; }
+.size-20 { -fx-font-size: 20px; }
+.size-24 { -fx-font-size: 24px; }
+.size-28 { -fx-font-size: 28px; }
+.size-32 { -fx-font-size: 32px; }

@@ -1,0 +1,30 @@
+/* ==========================================================================
+   DESIGN TOKENS (Primitive Palette)
+   ========================================================================== */
+
+.root {
+    /* Brand Colors (Violet) */
+    -pal-violet-50:  #f5f3ff;
+    -pal-violet-100: #ede9fe;
+    -pal-violet-400: #a78bfa;
+    -pal-violet-500: #8b5cf6;
+    -pal-violet-600: #7c3aed;
+
+    /* Neutrals (Slate/Gray) */
+    -pal-white:      #ffffff;
+    -pal-gray-50:    #f8fafc;
+    -pal-gray-100:   #f1f5f9;
+    -pal-gray-200:   #e2e8f0;
+    -pal-gray-300:   #cbd5e1;
+    -pal-gray-400:   #94a3af;
+    -pal-gray-500:   #64748b;
+    -pal-gray-600:   #475569;
+    -pal-gray-700:   #334155;
+    -pal-gray-800:   #1e293b;
+    -pal-gray-900:   #0f172a;
+
+    /* Dark Mode specific base colors */
+    -pal-dark-bg:    #020617; /* Darker Slate */
+    -pal-dark-surf:  #0f172a; /* Lighter Slate for surfaces */
+    -pal-dark-strk:  #1e293b; /* Borders in dark mode */
+}

@@ -1,0 +1,52 @@
+/* ==========================================================================
+   UTILITY CLASSES (Atomic Design Architecture)
+   ========================================================================== */
+
+/* --- 1. BACKGROUNDS --- */
+.bg-bg      { -fx-background-color: -color-bg; }
+.bg-surface { -fx-background-color: -color-surface; }
+.bg-primary { -fx-background-color: -color-primary; }
+.bg-primary-soft { -fx-background-color: -color-primary-soft; }
+
+/* --- 2. TEXT COLORS --- */
+.text-hi     { -fx-text-fill: -color-txt-hi; }
+.text-lo     { -fx-text-fill: -color-txt-lo; }
+.text-primary { -fx-text-fill: -color-primary; }
+.text-white  { -fx-text-fill: white; }
+.text-accent { -fx-text-fill: -color-primary; }
+
+/* --- 3. TYPOGRAPHY (FONT SIZES) --- */
+.size-10 { -fx-font-size: 10px; }
+.size-11 { -fx-font-size: 11px; }
+.size-12 { -fx-font-size: 12px; }
+.size-13 { -fx-font-size: 13px; }
+.size-14 { -fx-font-size: 14px; }
+.size-16 { -fx-font-size: 16px; }
+.size-18 { -fx-font-size: 18px; }
+.size-20 { -fx-font-size: 20px; }
+.size-24 { -fx-font-size: 24px; }
+.size-32 { -fx-font-size: 32px; }
+.size-48 { -fx-font-size: 48px; }
+
+.font-bold { -fx-font-weight: bold; }
+
+/* --- 4. BORDERS & RADIUS --- */
+.border-all    { -fx-border-width: 1; -fx-border-color: -color-stroke; }
+.border-bottom { -fx-border-width: 0 0 1 0; -fx-border-color: -color-stroke; }
+.border-full   { -fx-border-width: 1; -fx-border-color: -color-stroke; }
+
+.rounded-sm { -fx-background-radius: 6; -fx-border-radius: 6; }
+.rounded-md { -fx-background-radius: 12; -fx-border-radius: 12; }
+.rounded-lg { -fx-background-radius: 20; -fx-border-radius: 20; }
+.rounded-xl { -fx-background-radius: 24; -fx-border-radius: 24; }
+.rounded-full { -fx-background-radius: 100; -fx-border-radius: 100; }
+
+/* --- 5. LAYOUT & SIZING --- */
+.h-80 { -fx-min-height: 80; -fx-max-height: 80; }
+.h-40 { -fx-min-height: 40; -fx-max-height: 40; }
+
+/* --- 6. EFFECTS & CURSOR --- */
+.shadow      { -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 15, 0, 0, 5); }
+.cursor-hand { -fx-cursor: hand; }
+.text-center { -fx-text-alignment: center; }
+.leading-relaxed { -fx-line-spacing: 5; }

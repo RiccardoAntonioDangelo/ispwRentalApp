@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      spacing="30.0" alignment="TOP_CENTER">
+
+    <padding>
+        <Insets top="60.0" right="40.0" bottom="40.0" left="40.0"/>
+    </padding>
+
+    <VBox spacing="10.0" alignment="CENTER">
+        <Label fx:id="titleLabel" styleClass="size-24, font-bold, text-hi"/>
+    </VBox>
+
+    <VBox spacing="20.0" maxWidth="600.0" styleClass="bg-surface, rounded-lg, border-all">
+        <padding>
+            <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+        </padding>
+
+        <HBox alignment="CENTER_LEFT" spacing="20.0">
+            <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                <Label fx:id="themeLabel" styleClass="size-16, font-bold, text-hi"/>
+            </VBox>
+            <ToggleButton fx:id="themeToggle" onAction="#handleThemeToggle" styleClass="btn-breadcrumb"/>
+        </HBox>
+    </VBox>
+
+</VBox>

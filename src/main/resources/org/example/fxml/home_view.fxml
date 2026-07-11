@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="rootContainer" alignment="TOP_CENTER"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="bg-bg">
+
+    <VBox spacing="30.0" styleClass="center-content" alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="60.0" right="40.0" bottom="60.0" left="40.0"/>
+        </padding>
+
+        <VBox spacing="15.0" alignment="TOP_CENTER">
+            <StackPane styleClass="hero-icon-box">
+                <Label fx:id="heroIcon" styleClass="hero-icon-text"/>
+            </StackPane>
+
+            <Label fx:id="welcomeTitle" styleClass="welcome-title"/>
+            <Label fx:id="welcomeSubtitle" styleClass="welcome-subtitle" wrapText="true" maxWidth="650.0" alignment="CENTER" textAlignment="CENTER"/>
+        </VBox>
+
+        <HBox spacing="40.0" alignment="CENTER" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20.0"/>
+            </padding>
+
+            <VBox spacing="20.0" styleClass="card-container" alignment="TOP_CENTER" prefWidth="350.0" HBox.hgrow="NEVER">
+                <padding>
+                    <Insets top="40.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                <StackPane styleClass="card-icon-box">
+                    <Label fx:id="rentIcon" styleClass="card-icon-emoji"/>
+                </StackPane>
+                <Label fx:id="rentTitle" styleClass="card-title"/>
+                <Label fx:id="rentDesc" styleClass="card-desc" wrapText="true" textAlignment="CENTER" minHeight="60.0"/>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <Button fx:id="rentBtn" onAction="#handleRentAction" styleClass="card-button" maxWidth="Infinity"/>
+                <Label fx:id="rentRole" styleClass="card-role-label"/>
+            </VBox>
+
+            <VBox spacing="20.0" styleClass="card-container" alignment="TOP_CENTER" prefWidth="350.0" HBox.hgrow="NEVER">
+                <padding>
+                    <Insets top="40.0" right="30.0" bottom="30.0" left="30.0"/>
+                </padding>
+                <StackPane styleClass="card-icon-box">
+                    <Label fx:id="addIcon" styleClass="card-icon-emoji"/>
+                </StackPane>
+                <Label fx:id="addTitle" styleClass="card-title"/>
+                <Label fx:id="addDesc" styleClass="card-desc" wrapText="true" textAlignment="CENTER" minHeight="60.0"/>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <Button fx:id="addBtn" onAction="#handleAddAction" styleClass="card-button" maxWidth="Infinity"/>
+                <Label fx:id="addRole" styleClass="card-role-label"/>
+            </VBox>
+        </HBox>
+    </VBox>
+</VBox>

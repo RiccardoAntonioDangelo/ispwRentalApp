@@ -1,0 +1,53 @@
+
+       /* ==========================================================================
+          THEME DEFINITIONS (Semantic Tokens)
+          ========================================================================== */
+
+       /* Tema di Default (Valori inseriti direttamente nel root globale) */
+   .root {
+       -color-bg:           #f8fafc; /* -pal-gray-50 */
+       -color-surface:      #ffffff; /* -pal-white */
+       -color-stroke:       #e2e8f0; /* -pal-gray-200 */
+       -color-border:       #e2e8f0; /* -pal-gray-200  */
+       -color-primary:      #7c3aed; /* -pal-violet-600 */
+       -color-primary-soft: #f5f3ff; /* -pal-violet-50 */
+       -color-dark:         #0f172a; /* -pal-gray-900 */
+       -color-txt-hi:       #0f172a; /* -pal-gray-900 */
+       -color-txt-lo:       #475569; /* -pal-gray-600 */
+       -btn-txt:            #ffffff; /* -pal-white */
+   }
+
+/* Classe esplicita Light (Valori iniettati direttamente) */
+.theme-light {
+    -color-bg:           #f8fafc; /* -pal-gray-50 */
+    -color-surface:      #ffffff; /* -pal-white */
+    -color-stroke:       #e2e8f0; /* -pal-gray-200 */
+    -color-border:       #e2e8f0; /* -pal-gray-200 */
+    -color-primary:      #7c3aed; /* -pal-violet-600 */
+    -color-primary-soft: #f5f3ff; /* -pal-violet-50 */
+    -color-dark:         #0f172a; /* -pal-gray-900 */
+    -color-txt-hi:       #0f172a; /* -pal-gray-900 */
+    -color-txt-lo:       #475569; /* -pal-gray-600 */
+    -btn-txt:            #ffffff; /* -pal-white */
+}
+
+/* Classe Dark applicata da Style.java */
+.theme-dark {
+    /* Background & Surfaces (Black & Grey) */
+    -color-bg:           #050505;
+    -color-surface:      #000000;
+    -color-stroke:       #121212;
+    -color-border:       #121212;
+
+    /* Identity (Violet Accent) */
+    -color-primary:      #6a46d5;
+    -color-primary-soft: #3b047e;
+
+    /* Texts */
+    -color-txt-hi:       #ffffff;
+    -color-txt-lo:       #a0a0a0;
+
+    /* Action Elements */
+    -color-dark:         #ffffff;
+    -btn-txt:            #050505;
+}

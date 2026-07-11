@@ -1,0 +1,90 @@
+/* ==========================================================================
+   COMPONENTS: CARDS (Shadow & Radius Fix)
+   ========================================================================== */
+
+.card-container {
+    -fx-background-color: -color-surface;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #eeeeee;
+    -fx-border-width: 1px;
+    -fx-min-width: 380;
+    -fx-max-width: 380;
+    /* Ombra esplicita per evitare errori di cast */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 15, 0, 0, 5);
+}
+
+.card-icon-box {
+    -fx-background-color: -color-primary-soft;
+    -fx-background-radius: 50px;
+    -fx-min-width: 70;
+    -fx-min-height: 70;
+    -fx-max-width: 70;
+    -fx-max-height: 70;
+}
+
+.card-icon-emoji {
+    -fx-text-fill: -color-primary;
+    -fx-font-size: 26px;
+}
+
+.card-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-txt-hi;
+}
+
+.card-desc {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-txt-lo;
+    -fx-line-spacing: 3px;
+}
+
+.card-role-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-txt-lo;
+    -fx-cursor: hand;
+}
+
+.card-role-label:hover {
+    -fx-text-fill: -color-primary;
+    -fx-underline: true;
+}
+
+.hero-icon-box {
+    -fx-background-color: -color-primary;
+    -fx-background-radius: 15px;
+    -fx-max-width: 60;
+    -fx-max-height: 60;
+    -fx-min-width: 60;
+    -fx-min-height: 60;
+}
+
+.hero-icon-text {
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+}
+
+.logo-box-size { -fx-min-width: 45; -fx-min-height: 45; -fx-max-width: 45; -fx-max-height: 45; }
+.hero-box-size { -fx-min-width: 60; -fx-min-height: 60; -fx-max-width: 60; -fx-max-height: 60; }
+
+/* --- Role Selection Cards (Register) --- */
+.card-active {
+    -fx-border-color: -color-primary;
+    -fx-border-width: 2px;
+    -fx-background-color: -color-primary-soft;
+}
+
+.card-inactive {
+    -fx-border-color: -color-border;
+    -fx-border-width: 1px;
+    -fx-background-color: transparent;
+}
+
+.dot-active {
+    -fx-background-color: -color-primary;
+}
+
+.dot-inactive {
+    -fx-background-color: -color-border;
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true" fitToHeight="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://fxml.com/fxml/1"
+            styleClass="bg-bg" >
+
+    <VBox alignment="TOP_CENTER" spacing="30.0" styleClass="bg-bg">
+        <padding>
+            <Insets top="40.0" right="40.0" bottom="40.0" left="40.0"/>
+        </padding>
+
+        <VBox maxWidth="1000.0" spacing="20.0" styleClass="bg-bg" VBox.vgrow="ALWAYS">
+            <Label fx:id="titleLabel" styleClass="size-24, font-bold, text-hi"/>
+
+            <VBox fx:id="rentalsListContainer" spacing="15.0" styleClass="bg-bg" VBox.vgrow="ALWAYS">
+            </VBox>
+        </VBox>
+    </VBox>
+</ScrollPane>
