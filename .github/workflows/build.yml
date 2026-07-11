@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'temurin' # Configurato per Eclipse Temurin
+          distribution: 'temurin'
 
       - name: Cache SonarQube packages
         uses: actions/cache@v4
@@ -37,4 +37,5 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=RiccardoAntonioDangelo_ispwRentalApp
+        # Ho aggiunto il parametro -Dsonar.organization in fondo al comando
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=RiccardoAntonioDangelo_ispwRentalApp -Dsonar.organization=riccardoantoniodangelo
