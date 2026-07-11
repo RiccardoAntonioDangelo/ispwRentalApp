@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>tuo.package</groupId>
+    <!-- 1. Prima vanno le informazioni del progetto -->
+    <groupId>com.riccardo.ispw</groupId>
     <artifactId>ispwRentalApp</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- Solo a questo punto possono esserci le properties -->
+    <!-- 2. SOLO ORA puoi mettere il blocco properties che avevi prima -->
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <!-- ... le tue altre properties ... -->
+        <!-- Incolla qui dentro le altre righe che avevi dentro il tuo vecchio <properties> -->
     </properties>
 
-    <!-- ... il resto del file (dependencies, build, ecc.) ... -->
-
+    <!-- Da qui in poi continua il tuo file normalmente (dependencies, build, ecc.) -->
 </project>
