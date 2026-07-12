@@ -29,7 +29,7 @@ public abstract class DAOFactory {
         };
     }
     public static <T extends EntityDAO<?>> T getDAOFactory(EnumDaoType daoType,EntityType entityType){
-       return DAOFactory.getDAOFactory(daoType).getEntity(entityType);
+        return DAOFactory.getDAOFactory(daoType).getEntity(entityType);
     }
     public static DAOFactory getDAOFactory(int whichFactory) {
         return getDAOFactory(EnumDaoType.fromValue(whichFactory));
