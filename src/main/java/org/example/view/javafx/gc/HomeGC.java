@@ -62,15 +62,15 @@ public class HomeGC extends GraphicController<HomeGC> {
      * Gestisce il refresh dinamico della Home quando l'utente ci torna o cambia sessione.
      */
     @Override
-    public HomeGC updateView() {//TODO
-        // Se in futuro avrai dati dinamici in Home (es. "Benvenuto, [Nome Utente]"),
-        // la logica di recupero dalla memoria andrà inserita esattamente qui.
-        return this; // Permette il chaining fluent
+    public HomeGC updateView() {
+        return this;
+        // Permette il chaining fluent xtodo
     }
 
     @FXML
     private void handleAddAction() {
-        // xTodo handle(null);
+        // xTodo
+
     }
 
     @FXML

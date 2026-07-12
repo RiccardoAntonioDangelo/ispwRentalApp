@@ -8,7 +8,7 @@ import org.example.model.entity.product.Product;
 import org.example.model.entity.rental.RentalOld;
 import org.example.model.entity.session.Session;
 
-public class Main {
+public class FactoryTest {
     public static void main(String[] args) {
         System.out.println("--- TEST ARCHITETTURA FACTORY ---");
 

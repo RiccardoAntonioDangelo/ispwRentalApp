@@ -3,7 +3,6 @@ package org.example.model.entity.session;
 import org.example.model.dao.filejson.SmartJsonSerializer;
 import org.example.model.entity.LazyEntityList;
 import org.example.model.entity.actors.User;
-import org.example.model.entity.session.Session;
 import org.example.model.services.CollectionI;
 
 import java.nio.file.Path;
@@ -13,7 +12,7 @@ import java.nio.file.Path;
  * SmartJsonSerializer quando salva/ricarica una Session con
  * una LazyEntityList popolata (es. il campo lazyCollections).
  */
-public class SmartJsonSessionDiagnosticMain {
+public class SmartJsonSessionDiagnosticMainTest {
 
     public static void main(String[] args) throws Exception {
         Path tempDir = Path.of("diagnostic-data");

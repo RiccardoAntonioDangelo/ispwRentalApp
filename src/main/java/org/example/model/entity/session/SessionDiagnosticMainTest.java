@@ -14,7 +14,7 @@ import java.util.Map;
  * dove nasce il ClassCastException su Session/CollectionI.
  * Esegui questo, guarda quale test stampa "FALLITO" prima degli altri.
  */
-public class SessionDiagnosticMain {
+public class SessionDiagnosticMainTest {
 
     public static void main(String[] args) {
         test1_flussoRuntimePuro();

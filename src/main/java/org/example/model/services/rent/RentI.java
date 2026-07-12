@@ -42,7 +42,7 @@ public interface RentI extends EntityI<String>, WorkI {
     }
 
     default boolean canWork(SessionI sessionI, UserI userI) {
-        if (userI instanceof ActionsRentIOld worker) {
+        if (userI instanceof ActionsClientRentI worker) {
             return worker.execute(sessionI, this);
         }
         return false;

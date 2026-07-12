@@ -7,6 +7,10 @@ import javafx.scene.Scene;
  * Classe per la gestione centralizzata dello stile e del cambio tema tramite classi CSS.
  */
 public class Style {
+    private Style() {
+        /* This utility class should not be instantiated */
+    }
+
     // File CSS principale (Design System)
     public static final String MAIN_STYLE = "/org/example/main.css";
 
@@ -25,7 +29,7 @@ public class Style {
     public static final String BTN_BREADCRUMB ="btn-breadcrumb";
     public static final String TEXT_LO = "text-lo";
     public static final String BREADCRUMB_ACTIVE = "breadcrumb-active";
-    public static final String BTN_NAV ="btn-breadcrumb"; //"btn-nav";
+    public static final String BTN_NAV ="btn-breadcrumb"; //btn-nav
 
     /**
      * Applica il filedeprecated CSS principale alla scena.

@@ -22,7 +22,7 @@ public class UserBean  {
     public void fromEntity(User user) {
         this.email.set(user.getEmail());
         this.fullName.set(user.getName() + " " + user.getSurname());
-        //todo this.role.set(user.getRole());
+        this.role.set(user.getRole().toString());
         this.phone.set(user.getPhone());
     }
 

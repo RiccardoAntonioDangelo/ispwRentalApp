@@ -72,7 +72,6 @@ public interface ActionsRentI {
         if (clientSession == null || rent == null || ownerSession==null ) throw new IllegalArgumentException("IllegalArgument null");
         if(clientSession.getRole() instanceof ActionsClientRentI clientRentI && ownerSession.getRole() instanceof ActionsOwnerRentI ownerRentI){
             clientRentI.requestRent(clientSession,rent);
-            //if(!ownerRentI.myRent(rent))throw new IllegalArgumentException("owner non e' il proprietario ");
             ownerRentI.receiveRent(ownerSession,rent);
         }
     }
@@ -80,7 +79,7 @@ public interface ActionsRentI {
         boolean value=false;
         if(session.getRole() instanceof ActionsClientRentI clientRentI)
             value= clientRentI.cancelClientRent(session,rent);
-        if(session.getRole() instanceof ActionsOwnerRentI ownerRentI)//todo verifica se sei il vero proprietario
+        if(session.getRole() instanceof ActionsOwnerRentI ownerRentI)//xtodo verifica se sei il vero proprietario
            value= ownerRentI.cancelOwnerRent(session,rent) || value ;
         return value;
     }

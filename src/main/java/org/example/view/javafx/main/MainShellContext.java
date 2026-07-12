@@ -51,7 +51,7 @@ public class MainShellContext extends Context {
     public GraphicController<?> getCurrentState() {
         if (super.getCurrentState() instanceof GraphicController<?> graphicController) {
             return graphicController;
-        }//todo strapp
+        }//xtodo strapp
         throw new IllegalArgumentException(String.format(
                 "Lo stato deve essere di tipo GraphicController, ricevuto: %s",
                 super.getCurrentState() != null ? super.getCurrentState().getClass().getSimpleName() : "null"

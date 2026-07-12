@@ -1,6 +1,4 @@
 package org.example.model.entity.actors.strategy;
-
-import org.example.exceptions.dao.file.EntityNotFoundException;
 import org.example.model.services.user.UserI;
 
 import java.io.Serializable;

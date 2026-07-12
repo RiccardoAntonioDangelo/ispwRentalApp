@@ -15,10 +15,9 @@ public interface UserI extends EntityI<String> {
 
         if(work.canWork(session,this))return true;
         throw new UnsupportedOperationException(
-                String.format("L'operazione 'execute' in [%s] non supporta la combinazione di Sessione [%s] e Lavoro [%s]",
+                String.format("L'operazione 'execute' in [%s] non supporta la combinazione di Sessione [%s] e Lavoro ",
                         this.getClass().getSimpleName(),
-                        (session != null ? session.getClass().getSimpleName() : "null"),
-                        (work != null ? work.getClass().getSimpleName() : "null"))
+                        (session != null ? session.getClass().getSimpleName() : "null"))
         );
     }
     /**

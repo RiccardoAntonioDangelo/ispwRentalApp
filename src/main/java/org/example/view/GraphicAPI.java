@@ -1,6 +1,6 @@
 package org.example.view;
 
-import org.example.controller.application.RentalController2;
+import org.example.controller.application.RentalController;
 import org.example.controller.bean.*;
 import org.example.controller.application.login.LoginController;
 import org.example.controller.application.login.RegisterController;
@@ -66,20 +66,10 @@ public class GraphicAPI {
      * Utilizzato dal sistema per mostrare gli articoli disponibili a seguito del caricamento dati.
      */
     public static CatalogBean getCatalog() {
-        return RentalController2.getCatalog();
+        return RentalController.getCatalog();
     }
 
-    /**
-     * Genera e pre-popola il MODULO di noleggio (Storyboard 2.5) abbinando la sessione cliente al prodotto scelto.
-     * Verifica preventivamente la reale disponibilità dell'annuncio.
-     * * [Internal Step 10a]: Se l'articolo è rimosso o già occupato, solleva un'eccezione bloccante.
-     */
-//    public static RentalFormBean getRentalForm(SessionBean session, ProductBean productBean) throws RentalException {
-//        if (productBean == null || !productBean.getProduct().isAvailable()) {
-//            throw new RentalException(StrAppSystem.get(StrAppSystem.ERR_ITEM_UNAVAILABLE));
-//        }
-//        return RentalController2.getRentalForm(session, productBean);
-//    }
+
 
     /**
      * Invia la richiesta di noleggio compilata dal modulo al controller di business.
@@ -87,14 +77,14 @@ public class GraphicAPI {
      * periodo, luogo consegna, note, costo del servizio e istanza articolo).
      */
     public static void sendApi(SessionBean session, RentalFormBean rentalData) throws RentalException {
-        new RentalController2().saveRental(session, rentalData);
+        RentalController.saveRental(session, rentalData);
     }
 
     /**
      * Recupera lo storico e la coda delle richieste di noleggio associate alla sessione utente.
      */
     public static List<RentalFormBean> getUserRentals(SessionBean session) {
-        return new RentalController2().getUserRentals(session);
+        return  RentalController.getUserRentals(session);
     }
 
     /**
@@ -103,7 +93,7 @@ public class GraphicAPI {
      * Message di ritorno previsto: StrAppSystem.MSG_CONFIRM_ACCEPTED ("noleggio accettato").
      */
     public static void acceptRentalApi(SessionBean session, RentalFormBean rentalData) throws RentalException {
-        new RentalController2().acceptRental(session, rentalData);
+        RentalController.acceptRental(session, rentalData);
     }
 
     /**
@@ -112,14 +102,14 @@ public class GraphicAPI {
      * Message di ritorno previsto: StrAppSystem.MSG_CONFIRM_REJECTED ("noleggio rifiutato").
      */
     public static void rejectRentalApi(SessionBean session, RentalFormBean rentalData) throws RentalException {
-        new RentalController2().rejectRental(session, rentalData);
+        RentalController.rejectRental(session, rentalData);
     }
 
     /**
      * Consente l'annullamento o la rimozione di una pratica di noleggio in base ai privilegi del ruolo.
      */
     public static void cancelRentalApi(SessionBean session, RentalFormBean rentalData) throws RentalException {
-        new RentalController2().cancelRental(session, rentalData);
+         RentalController.cancelRental(session, rentalData);
     }
 
     /**
@@ -127,13 +117,13 @@ public class GraphicAPI {
      * A buon fine, il sistema sposta il noleggio nell'area personale e rende l'annuncio NON disponibile.
      */
     public static void payRentalApi(SessionBean session, RentalFormBean rentalData) throws RentalException {
-        new RentalController2().confirmPaymentAndFinalize(session, rentalData);
+         RentalController.confirmPaymentAndFinalize(session, rentalData);
     }
 
     /**
      * Metodo di utility/dummy adibito a test rapidi di flusso o simulazioni automatizzate dei noleggi.
      */
     public static void magicRentalApi(SessionBean session, RentalFormBean rentalData) throws RentalException {
-        new RentalController2().magicRentalDummy(session, rentalData);
+         RentalController.magicRentalDummy(session, rentalData);
     }
 }

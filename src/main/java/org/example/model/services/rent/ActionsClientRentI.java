@@ -40,4 +40,9 @@ public interface ActionsClientRentI {
     default CollectionI<RentI> getClientRents(SessionI session) {
         return ActionsRentI.getRentsFromSession(session, getKey());
     }
+
+    default boolean execute(SessionI session, RentI rent) {
+        if (session == null) {throw new IllegalArgumentException("Sessione non valida durante l'esecuzione del noleggio.");}
+        return requestRent(session,rent);
+    }
 }

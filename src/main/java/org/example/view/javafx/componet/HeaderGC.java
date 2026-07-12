@@ -39,7 +39,6 @@ public class HeaderGC extends GraphicController<HeaderGC> {
      */
     @Override
     public HeaderGC updateView() {
-        //todo ricorsiva su le interfacie che controla
         return this;
     }
 

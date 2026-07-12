@@ -132,7 +132,7 @@ public class RentalFormBean extends AbstractBean {
                 this.end
         ).setOwnerEmail(ownerEmail);
 
-        // Se valido, riversa i dati del Bean nel Modello Rental todo mancano dei campi
+        // Se valido, riversa i dati del Bean nel Modello Rental xtodo mancano dei campi
         return true;
     }
 

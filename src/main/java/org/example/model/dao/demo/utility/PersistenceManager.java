@@ -75,6 +75,7 @@ public class PersistenceManager {
     }
 
     protected void loadDemoData() {
+        //todo
         System.out.println("Caricamento dati demo nel catalogo noleggi...");
 
         // Usiamo una costante per l'email del nostro Owner mock

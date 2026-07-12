@@ -9,7 +9,16 @@ import org.example.view.javafx.util.GraphicController;
 import org.example.view.javafx.util.ViewRoute;
 import org.example.controller.bean.ProductBean;
 
+/**
+ * Controller grafico per la visualizzazione dettagliata di un singolo prodotto.
+ * Gestisce specifiche, condizioni, prezzi e l'avvio della procedura di prenotazione.
+ */
 public class ProductDetailGC extends GraphicController<ProductDetailGC> {
+
+    // Costanti per evitare stringhe duplicate (DRY)
+    private static final String STYLE_SIZE_14 = "size-14";
+    private static final String STYLE_TEXT_HI = "text-hi";
+    private static final String SPLIT_REGEX = ", ";
 
     @FXML private Label titleLabel;
     @FXML private Label subtitleLabel;
@@ -33,7 +42,7 @@ public class ProductDetailGC extends GraphicController<ProductDetailGC> {
     private ProductBean product;
 
     @FXML
-    public void initialize() {
+    void initialize() {
         specsTitleLabel.setText(StrApp.PRODUCT_DETAIL_SPECS_TITLE);
         priceUnitLabel.setText(StrApp.PRODUCT_DETAIL_PRICE_PERDAY);
         warrantyTitleLabel.setText(StrApp.PRODUCT_DETAIL_WARRANTY_TITLE);
@@ -56,16 +65,17 @@ public class ProductDetailGC extends GraphicController<ProductDetailGC> {
         return this;
     }
 
+    /**
+     * Svuota e popola la UI. La complessità è ora minima grazie ai metodi ausiliari delegati.
+     */
     private void updateUiWithProduct() {
         specsList.getChildren().clear();
         conditionsList.getChildren().clear();
 
-        // Lettura e riempimento UI guidati unicamente dalla lista dettagli
         for (String detail : product.getCompleteDetails()) {
             String prefix = getPrefixOf(detail);
             String value = detail.replace(prefix, "");
 
-            // MODIFICA: Struttura Switch Expression moderna di Java
             switch (prefix) {
                 case StrApp.PREFIX_TITLE -> titleLabel.setText(value);
                 case StrApp.PREFIX_SUBTITLE -> subtitleLabel.setText(value);
@@ -73,31 +83,49 @@ public class ProductDetailGC extends GraphicController<ProductDetailGC> {
                 case StrApp.PREFIX_TOTAL_PRICE -> totalPriceLabel.setText(value);
                 case StrApp.PREFIX_DISCOUNT -> discountTag.setText("-" + value + StrApp.TAG_SPECIAL_SUFFIX);
 
-                case StrApp.PREFIX_SPECS -> {
-                    for (String spec : value.split(", ")) {
-                        if (!spec.trim().isEmpty()) addSpecItem(spec);
-                    }
-                }
-                case StrApp.PREFIX_CONDITIONS -> {
-                    for (String condition : value.split(", ")) {
-                        if (!condition.trim().isEmpty()) addConditionItem(condition);
-                    }
-                }
-                default -> { /* Ignora prefissi non impattanti sulla grafica attuale (es. ID, OWNER) */ }
+                // Chiamata ai metodi ausiliari per azzerare la nidificazione
+                case StrApp.PREFIX_SPECS -> populateSplitItems(value, specsList, StrApp.DOT);
+                case StrApp.PREFIX_CONDITIONS -> populateSplitItems(value, conditionsList, StrApp.TRUE);
+
+                default -> { /* Ignora prefissi non impattanti sulla grafica attuale */ }
             }
         }
 
-        if (specsList.getChildren().isEmpty()) {
-            addSpecItem(StrApp.FALLBACK_SPECS);
-        }
-        if (conditionsList.getChildren().isEmpty()) {
-            addConditionItem(StrApp.FALLBACK_CONDITIONS);
+        checkFallbacks();
+    }
+
+    /**
+     * METODO AUSILIARIO: Elabora le stringhe separate da virgola (Specifiche/Condizioni)
+     * e le aggiunge al rispettivo contenitore grafico senza appesantire lo switch principale.
+     */
+    private void populateSplitItems(String value, VBox container, String bullet) {
+        for (String item : value.split(SPLIT_REGEX)) {
+            if (!item.trim().isEmpty()) {
+                Label label = new Label(bullet + item);
+                label.getStyleClass().addAll(STYLE_SIZE_14, STYLE_TEXT_HI);
+                container.getChildren().add(label);
+            }
         }
     }
 
     /**
-     * MODIFICA: Metodo di supporto per isolare il prefisso della stringa per lo switch
+     * METODO AUSILIARIO: Gestisce l'inserimento dei dati di fallback se le liste sono vuote.
      */
+    private void checkFallbacks() {
+        if (specsList.getChildren().isEmpty()) {
+            addFallbackItem(specsList, StrApp.DOT, StrApp.FALLBACK_SPECS);
+        }
+        if (conditionsList.getChildren().isEmpty()) {
+            addFallbackItem(conditionsList, StrApp.TRUE, StrApp.FALLBACK_CONDITIONS);
+        }
+    }
+
+    private void addFallbackItem(VBox container, String bullet, String text) {
+        Label label = new Label(bullet + text);
+        label.getStyleClass().addAll(STYLE_SIZE_14, STYLE_TEXT_HI);
+        container.getChildren().add(label);
+    }
+
     private String getPrefixOf(String detail) {
         if (detail.startsWith(StrApp.PREFIX_TITLE)) return StrApp.PREFIX_TITLE;
         if (detail.startsWith(StrApp.PREFIX_SUBTITLE)) return StrApp.PREFIX_SUBTITLE;
@@ -109,20 +137,8 @@ public class ProductDetailGC extends GraphicController<ProductDetailGC> {
         return "";
     }
 
-    private void addSpecItem(String text) {
-        Label label = new Label(StrApp.DOT + text);
-        label.getStyleClass().addAll("size-14", "text-hi");
-        specsList.getChildren().add(label);
-    }
-
-    private void addConditionItem(String text) {
-        Label label = new Label(StrApp.TRUE + text);
-        label.getStyleClass().addAll("size-14", "text-hi");
-        conditionsList.getChildren().add(label);
-    }
-
     @FXML
-    private void handleBooking() {
+    void handleBooking() {
         this.nextPage(new BookingGC().setProduct(product).initViewLoader().updateView());
     }
 

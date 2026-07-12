@@ -17,6 +17,9 @@ import java.util.List;
  */
 public class ProductCardGC extends AbstractComponentGC<ProductCardGC> {
 
+    // Costante introdotta per eliminare il warning della stringa ripetuta (SonarQube compliant)
+    private static final String STYLE_SIZE_13 = "size-13";
+
     @FXML private VBox cardRoot;
     @FXML private Label titleLabel;
     @FXML private Label subtitleLabel;
@@ -31,14 +34,23 @@ public class ProductCardGC extends AbstractComponentGC<ProductCardGC> {
     /**
      * Factory Method statico per generare in modo pulito il nodo grafico Parent del Prodotto.
      * Sfrutta l'istanza astratta per caricare l'FXML.
+     *
+     * @param bean             Il Bean contenente i dati del prodotto da mostrare.
+     * @param onDetailsClicked L'azione da eseguire al click sul pulsante dei dettagli.
+     * @return Il nodo grafico {@link Parent} pronto per essere inserito nella UI.
      */
     public static Parent createCard(ProductBean bean, Runnable onDetailsClicked) {
-        // Sfrutta l'istanza anonima temporanea per richiamare il caricamento centralizzato della rotta
         ProductCardGC controller = new ProductCardGC().getComponentGraphicController();
         controller.setProductData(bean, onDetailsClicked);
         return controller.getView();
     }
 
+    /**
+     * Implementazione obbligatoria per aggiornare lo stato del componente.
+     * Ritorna l'istanza corrente (Fluent Interface).
+     *
+     * @return L'istanza stessa del controller.
+     */
     @Override
     public ProductCardGC updateView() {
         return this;
@@ -46,14 +58,15 @@ public class ProductCardGC extends AbstractComponentGC<ProductCardGC> {
 
     /**
      * Inietta i dati del prodotto all'interno dei nodi JavaFX e mappa la logica visiva condizionale.
+     *
+     * @param bean             Il Bean con le informazioni aggiornate.
+     * @param onDetailsClicked Il callback per l'evento di navigazione/dettaglio.
      */
     public void setProductData(ProductBean bean, Runnable onDetailsClicked) {
         this.onDetailsClicked = onDetailsClicked;
 
-        // Lista per accumulare i dettagli intermedi (es. categoria, sconto) da mostrare nel badge centrale
         List<String> midElements = new ArrayList<>();
 
-        // Analisi e parsing dei dettagli ridotti ricevuti dal Bean
         for (String detail : bean.getReducedDetails()) {
             String prefix = getPrefixOf(detail);
             String value = detail.replace(prefix, "");
@@ -78,21 +91,20 @@ public class ProductCardGC extends AbstractComponentGC<ProductCardGC> {
             badgeLabel.setManaged(false);
         }
 
-        // Iniezione delle stringhe di interfaccia internazionalizzate
         fromLabel.setText(StrApp.PRODUCT_PRICE_FROM);
         detailsBtn.setText(StrApp.BTN_DETAILS);
 
-        // Reset e applicazione degli stili CSS e dell'opacità legati alla disponibilità del prodotto
-        subtitleLabel.getStyleClass().removeAll("size-13", "text-accent", "text-lo");
+        // Reset e applicazione degli stili CSS usando la nuova costante
+        subtitleLabel.getStyleClass().removeAll(STYLE_SIZE_13, "text-accent", "text-lo");
 
         if (bean.getProduct().isAvailable()) {
             subtitleLabel.setText(StrApp.PRODUCT_STATUS_AVAILABLE);
-            subtitleLabel.getStyleClass().addAll("size-13", "text-accent");
+            subtitleLabel.getStyleClass().addAll(STYLE_SIZE_13, "text-accent");
             cardRoot.setOpacity(1.0);
         } else {
             subtitleLabel.setText(StrApp.PRODUCT_STATUS_UNAVAILABLE);
-            subtitleLabel.getStyleClass().addAll("size-13", "text-lo");
-            cardRoot.setOpacity(0.6); // Effetto visivo disattivato/semi-trasparente
+            subtitleLabel.getStyleClass().addAll(STYLE_SIZE_13, "text-lo");
+            cardRoot.setOpacity(0.6);
         }
     }
 
@@ -100,16 +112,29 @@ public class ProductCardGC extends AbstractComponentGC<ProductCardGC> {
      * Mappa ed estrae in sicurezza il prefisso della stringa di dettaglio per l'uso nello switch.
      */
     private String getPrefixOf(String detail) {
-        if (detail.startsWith(StrApp.PREFIX_TITLE)) return StrApp.PREFIX_TITLE;
-        if (detail.startsWith(StrApp.PREFIX_SUBTITLE)) return StrApp.PREFIX_SUBTITLE;
-        if (detail.startsWith(StrApp.PREFIX_DAILY_PRICE)) return StrApp.PREFIX_DAILY_PRICE;
-        if (detail.startsWith(StrApp.PREFIX_DISCOUNT)) return StrApp.PREFIX_DISCOUNT;
-        if (detail.startsWith(StrApp.PREFIX_TOTAL_PRICE)) return StrApp.PREFIX_TOTAL_PRICE;
+        if (detail.startsWith(StrApp.PREFIX_TITLE)) {
+            return StrApp.PREFIX_TITLE;
+        }
+        if (detail.startsWith(StrApp.PREFIX_SUBTITLE)) {
+            return StrApp.PREFIX_SUBTITLE;
+        }
+        if (detail.startsWith(StrApp.PREFIX_DAILY_PRICE)) {
+            return StrApp.PREFIX_DAILY_PRICE;
+        }
+        if (detail.startsWith(StrApp.PREFIX_DISCOUNT)) {
+            return StrApp.PREFIX_DISCOUNT;
+        }
+        if (detail.startsWith(StrApp.PREFIX_TOTAL_PRICE)) {
+            return StrApp.PREFIX_TOTAL_PRICE;
+        }
         return "";
     }
 
+    /**
+     * Gestisce l'azione di click sul pulsante dei dettagli.
+     */
     @FXML
-    private void onDetailsAction() {
+    void onDetailsAction() {
         if (onDetailsClicked != null) {
             onDetailsClicked.run();
         }

@@ -17,7 +17,7 @@ public interface ActionsProductI  {
         sessionI.addItem(PRODUCT_COLLECTION_KEY,product);
     }
     default CollectionI<ProductI> getProducts(SessionI sessionI){
-        return sessionI.getCollection(PRODUCT_COLLECTION_KEY);
+        return  sessionI.getCollection(PRODUCT_COLLECTION_KEY);
     }
     default boolean execute(SessionI session, ProductI product) {
         if (session == null) {throw new IllegalArgumentException("Sessione non valida durante l'esecuzione del noleggio.");}
@@ -25,15 +25,6 @@ public interface ActionsProductI  {
         return true;
     }
 
-    /**
-     * Crea un nuovo prodotto e lo associa all'utente in sessione.
-     * * @param currentSession La sessione dell'utente che sta creando il prodotto.
-     * @param name           Nome del prodotto.
-     * @param description    Descrizione dell'articolo.
-     * @param price          Prezzo (può essere di vendita o base per noleggio).
-     * @return L'istanza del prodotto appena creato.
-     */
-    //Product execute(Session<U> currentSession, String name, String description, double price);
 
     /**
      * Metodo per convalidare i dati del prodotto prima della creazione.

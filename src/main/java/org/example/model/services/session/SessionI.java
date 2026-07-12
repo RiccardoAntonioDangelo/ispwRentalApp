@@ -10,7 +10,7 @@ public interface SessionI extends EntityI<String> {
      * Verifica se una collezione esiste.
      */
     boolean hasCollection(String key);
-    CollectionI getCollection(String key);
+    <T> CollectionI<T> getCollection(String key);
 
     /**
      * Aggiunge una nuova collezione (sovrascrive se già presente).

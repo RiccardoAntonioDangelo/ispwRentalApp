@@ -7,18 +7,16 @@ import org.example.model.dao.abstractfactory.SessionDAO;
 import org.example.model.dao.abstractfactory.UserDAO;
 import org.example.model.dao.filejson.dao.FileJsonDAOFactory;
 import org.example.model.entity.actors.User;
-import org.example.model.entity.actors.strategy.UserStrategy;
 import org.example.model.entity.actors.factory.StrategyActorFactory;
 import org.example.model.entity.product.Product;
 import org.example.model.entity.session.Session;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class FilejsonTest {
     public static void main(String[] args) {
         System.out.println("=== INIZIO TEST ARCHITETTURA DAO FACTORY (JSON) ===");
 

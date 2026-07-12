@@ -8,58 +8,90 @@ import org.example.model.services.EntityI;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Gestisce riferimenti ID.
- * T: Tipo dell'Entità (es. User)
- * I: Tipo dell'ID (es. String)
+ * Gestisce una lista di riferimenti a entità caricati in modalità "Lazy" tramite il loro ID.
+ * Riduce l'occupazione di memoria mantenendo solo gli ID e caricando gli oggetti on-demand.
+ *
+ * @param <T> Il tipo dell'Entità (deve implementare {@link EntityI}).
+ * @param <I> Il tipo dell'identificativo (deve essere {@link Serializable}).
  */
 public class LazyEntityList<T extends EntityI<I>, I extends Serializable> implements Serializable {
+
+    private static final long serialVersionUID = 1L; // Consigliato da SonarQube per classi Serializable
 
     private final List<I> ids = new ArrayList<>();
     private final EntityType entityType;
 
-    // Prendiamo l'EntityType dal costruttore per sapere quale DAO usare
+    /**
+     * Costruttore che definisce il tipo di entità gestita per mappare correttamente il DAO.
+     *
+     * @param entityType L'enum che rappresenta il tipo di entità.
+     */
     public LazyEntityList(EntityType entityType) {
         this.entityType = entityType;
     }
 
     /**
-     * Il tipo T è vincolato alla classe. Riceve l'entità, la salva e tiene l'ID.
+     * Riceve un'entità, tenta il salvataggio persistente tramite DAO e ne memorizza l'ID.
+     *
+     * @param entity L'entità da salvare e tracciare.
+     * @throws IllegalStateException Se il salvataggio sul database/file fallisce.
      */
-    @SuppressWarnings("unchecked")
     public void addAndSave(T entity) {
-        if (entity == null) return;
+        if (entity == null) {
+            return;
+        }
 
-        // Recuperiamo il DAO specifico per il tipo T tramite l'Enum
+        // Il cast viene isolato e documentato per SonarQube
+        @SuppressWarnings("unchecked")
         EntityDAO<T> dao = (EntityDAO<T>) DAOManager.getEntity(entityType);
 
         if (dao.save(entity)) {
             I id = entity.getId();
-            if (!ids.contains(id)) {
+            if (id != null && !ids.contains(id)) {
                 ids.add(id);
             }
         } else {
-            throw new RuntimeException("Errore salvataggio persistente per: " + entityType);
+            // SonarQube preferisce eccezioni mirate (IllegalStateException) rispetto a RuntimeException generiche
+            throw new IllegalStateException("Errore salvataggio persistente per il tipo: " + entityType);
         }
     }
 
     /**
-     * Ritorna l'oggetto di tipo T caricandolo on-demand
+     * Recupera l'oggetto di tipo T caricandolo on-demand (Lazy Loading) tramite il suo indice.
+     *
+     * @param index L'indice dell'ID nella lista interna.
+     * @return L'entità completa recuperata dal DAO, oppure null se non trovata.
+     * @throws IndexOutOfBoundsException Se l'indice è fuori dai limiti della lista.
      */
-    @SuppressWarnings("unchecked")
     public T get(int index) {
         I id = ids.get(index);
+
+        @SuppressWarnings("unchecked")
         EntityDAO<T> dao = (EntityDAO<T>) DAOManager.getEntity(entityType);
-        return dao.getById(String.valueOf(id));
+
+        // Uso di Objects.toString per gestire in sicurezza eventuali ID particolari ed evitare NPE nascosti
+        return dao.getById(Objects.toString(id, null));
     }
 
+    /**
+     * Aggiunge direttamente un ID alla lista di riferimenti, se non è già presente.
+     *
+     * @param id L'identificativo da aggiungere.
+     */
     public void addId(I id) {
         if (id != null && !ids.contains(id)) {
             ids.add(id);
         }
     }
 
+    /**
+     * Restituisce il numero di elementi (ID) attualmente tracciati.
+     *
+     * @return Il numero di riferimenti nella lista.
+     */
     public int size() {
         return ids.size();
     }

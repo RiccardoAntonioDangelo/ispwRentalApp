@@ -23,7 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class RentalController2 implements LoginController, RegisterController {
+public class RentalController implements LoginController, RegisterController {
+    private RentalController() {
+        /* This utility class should not be instantiated */
+    }
+
 
     /**
      * FASE 1: Mostra tutti gli articoli disponibili nel catalogo.
@@ -40,15 +44,6 @@ public class RentalController2 implements LoginController, RegisterController {
         }
         return catalogBean;
     }
-    /**
-     * FASE 2: Genera il modulo di noleggio pre-compilato.
-     */
-//    public static RentalFormBean getRentalForm(SessionBean session, ProductBean productBean) throws RentalException {
-//        if (!LoginManager.isAuthenticated(session)) {
-//            throw new RentalException("Autenticazione richiesta per richiedere un modulo di noleggio.");
-//        }
-//        return new RentalFormBean().prePopulate(session,productBean);
-//    }
 
     /**
      * FASE 3: Il cliente invia la richiesta compilata.
@@ -59,20 +54,18 @@ public class RentalController2 implements LoginController, RegisterController {
             throw new RentalException("Autenticazione richiesta per completare il noleggio.");
         }
         rentalFormBean.setEmail(sessionBean.getUser());
-        if (rentalFormBean == null || !rentalFormBean.validateAndFill()) {
-            throw new RentalException(rentalFormBean != null ? rentalFormBean.getErrorMessage() : "Modulo non valido.");
+        if ( !rentalFormBean.validateAndFill()) {
+            throw new RentalException( rentalFormBean.getErrorMessage());
         }
         RentI rental = rentalFormBean.getRental();
         SessionI clientSession = sessionBean.getSession();
         SessionI ownerSession = DAOManager.getSessionDAO().getById(rental.getOwnerEmail());
-        rental.attach((ObserverI<EntityI<String>>) DAOManager.getRentalDAO());//todo emeil quella vera
+        rental.attach((ObserverI<EntityI<String>>) DAOManager.getRentalDAO());
         ActionsRentI.start(
                     clientSession,
                     ownerSession,
                     rental
                     );
-       // DAOManager.getRentalDAO().save(rental); todo
-
     }
 
 
@@ -96,11 +89,7 @@ public class RentalController2 implements LoginController, RegisterController {
             throw new RentalException("Modulo di noleggio non valido.");
         }
 
-        if (sessionBean.getSession().getRole() instanceof ActionsOwnerRentI ownerActions) {
-            // Controllo se l'utente è il proprietario usando il metodo dell'interfaccia
-//            if (!ownerActions.myRent(rental)) {
-//                throw new RentalException("Azione non autorizzata: non sei il proprietario di questo articolo.");
-//            }
+        if (sessionBean.getSession().getRole() instanceof ActionsOwnerRentI) {
             action.accept(rental);
             return;
         }
@@ -111,7 +100,7 @@ public class RentalController2 implements LoginController, RegisterController {
     /**
      * FASE 4a: Il proprietario accetta la richiesta di noleggio.
      */
-    public void acceptRental(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
+    public static void  acceptRental(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
         if(sessionBean.getSession().getRole() instanceof ActionsOwnerRentI ownerRentI ){
             opRental(sessionBean, rentalFormBean, ownerRentI::acceptRent);
         }else {
@@ -123,7 +112,7 @@ public class RentalController2 implements LoginController, RegisterController {
     /**
      * FASE 4b: Il proprietario rifiuta la richiesta di noleggio.
      */
-    public void rejectRental(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
+    public static void rejectRental(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
         if(sessionBean.getSession().getRole() instanceof ActionsOwnerRentI ownerRentI ){
             opRental(sessionBean, rentalFormBean, ownerRentI::rejectRent);
         }else {
@@ -133,7 +122,7 @@ public class RentalController2 implements LoginController, RegisterController {
     /**
      * FASE 5: Il cliente effettua il pagamento e finalizza.
      */
-    public void confirmPaymentAndFinalize(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
+    public static void confirmPaymentAndFinalize(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
         if (!LoginController.isAuthenticated(sessionBean)) {
             throw new RentalException("Autenticazione richiesta per finalizzare il pagamento.");
         }
@@ -145,15 +134,7 @@ public class RentalController2 implements LoginController, RegisterController {
         SessionI session = sessionBean.getSession();
 
         if (session.getRole() instanceof ActionsClientRentI clientActions) {
-            // Controllo simmetrico di sicurezza lato email client
-//            if (!sessionBean.getUser().equalsIgnoreCase(rental.getClientEmail())) {
-//                throw new RentalException("Azione non autorizzata: solo il cliente richiedente può effettuare il pagamento.");
-//            }
-
-            // Il cliente paga (il metodo setta il pagamento e chiama .activate())
-            // Nota: Passa un oggetto Payment concreto se lo hai a disposizione nel form
-            clientActions.payRent(rental, rentalFormBean.getPayment()); 
-
+            clientActions.payRent(rental, rentalFormBean.getPayment());
             ProductI product = DAOManager.getProductDAO().getById(rental.getProductId());
             if (product == null) {
                 throw new RentalException("Articolo di riferimento non trovato nel sistema.");
@@ -168,7 +149,7 @@ public class RentalController2 implements LoginController, RegisterController {
      * Carica i noleggi in base al ruolo dell'utente (Client o Owner) 
      * sfruttando il Polling Pigro centralizzato per i contratti scaduti.
      */
-    public List<RentalFormBean> getUserRentals(SessionBean sessionBean) {
+    public static List<RentalFormBean> getUserRentals(SessionBean sessionBean) {
         if (sessionBean == null || sessionBean.getSession() == null) {
             return new ArrayList<>();
         }
@@ -200,7 +181,7 @@ public class RentalController2 implements LoginController, RegisterController {
         return combinedList;
     }
 
-    private List<RentalFormBean> convertToBeanList(CollectionI<RentI> rents) {
+    private static List<RentalFormBean> convertToBeanList(CollectionI<RentI> rents) {
         List<RentalFormBean> beans = new ArrayList<>();
         if (rents == null) return beans;
         for (RentI item : rents) {
@@ -212,7 +193,7 @@ public class RentalController2 implements LoginController, RegisterController {
     /**
      * Annulla o rimuove un noleggio.
      */
-    public void cancelRental(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
+    public static void cancelRental(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
         if (sessionBean == null || sessionBean.getSession() == null || rentalFormBean == null) {
             throw new RentalException("Impossibile annullare: sessione o modulo nulli.");
         }//todo non funziona
@@ -227,8 +208,8 @@ public class RentalController2 implements LoginController, RegisterController {
 
     }
 
-    public void magicRentalDummy(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
-        if(sessionBean.getSession().getRole() instanceof ActionsOwnerRentI ownerRentI ){
+    public static void magicRentalDummy(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
+        if(sessionBean.getSession().getRole() instanceof ActionsOwnerRentI ){
             RentI rental =rentalFormBean.getRental();
             rental.setEndDate(rental.getStartDate().minusDays(1));
         }else {

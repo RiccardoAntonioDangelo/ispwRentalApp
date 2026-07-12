@@ -23,8 +23,8 @@ public class ProductBean {
     }
 
     public Product getConcreteProduct() {
-        if (product instanceof Product) {
-            return (Product) product;
+        if (product instanceof Product productc) {
+            return  productc;
         }
         return null;
     }
@@ -36,12 +36,11 @@ public class ProductBean {
     public String getId() { return product.getId(); }
     public String getTitle() { return product.getName(); }
     private String getDescription() { return product.getDescription(); }
-    private String getStrDailyPrice() { return product.getPrice() + StrApp.CURRENCY_EUR; }//todo
+    private String getStrDailyPrice() { return product.getPrice() + StrApp.CURRENCY_EUR; }//xtodo
     public String getOwnerEmail() {return product.getOwnerEmail();}
 
     private String getTotalPrice() {return StrApp.money(product.getPrice() * 7);}
 
-    //private  String getSubTitle() { return  "" ; }
     private String getDiscount() { return "0" + StrApp.SUFFIX_PERCENT; }
 
     // =========================================================================

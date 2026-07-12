@@ -91,20 +91,7 @@ public class BookingGC extends GraphicController<BookingGC> {
         if (this.product != null) {
             updateUiWithProduct();
         }
-
-//        // 2. Pre-popola i campi anagrafici prendendo l'utente dalla sessione in memoria
-//        if (this.getMainShellContext() != null && this.getMainShellContext().getMemory() != null) {
-//            SessionBean session = this.memory();
-//            if (session != null && session.getSession() != null && session.getSession().getUser() != null) {
-//                var user = session.getSession().getUser();
-//                if (user.getName() != null) nameField.setText(user.getName());
-//                if (user.getSurname() != null) surnameField.setText(user.getSurname());
-//                if (user.getEmail() != null) emailField.setText(user.getEmail());
-//                if (user.getPhone() != null) phoneField.setText(user.getPhone());
-//            }
-//        }
-
-        // 3. Calcola i prezzi finali
+        // 2. Calcola i prezzi finali
         updateDynamicPrices();
 
         return this; // Ritorna self per il chaining fluent

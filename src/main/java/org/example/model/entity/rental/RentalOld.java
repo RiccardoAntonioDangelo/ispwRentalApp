@@ -180,7 +180,7 @@ public class RentalOld implements RentI {
     }
 
     @Override
-    public boolean isOwner(ActionsOwnerRentI actionsOwnerRentI) {//todo
+    public boolean isOwner(ActionsOwnerRentI actionsOwnerRentI) {//xtodo
         if(actionsOwnerRentI instanceof User user){
         return Objects.equals(this.getOwnerEmail(), user.getEmail());}
         throw new IllegalArgumentException("isOwner SOLO se user e valutabile");

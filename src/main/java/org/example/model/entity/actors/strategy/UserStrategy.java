@@ -11,13 +11,13 @@ public class UserStrategy extends User {
     private RoleStrategyI role;
     public UserStrategy(String email, String password, RoleStrategyI role) {super(email,password);this.role=role;}
 
-    //public RoleStrategyI getRole() {return role;}
 
     public void setRole(RoleStrategyI role) {
         this.role = role;
         this.commitChange();
     }
 
+    @Override
     public boolean execute(SessionI session, WorkI work) {
        return role.execute(session,work);
     }

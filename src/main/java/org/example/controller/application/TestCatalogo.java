@@ -12,7 +12,7 @@ public class TestCatalogo {
         DAOManager.initializeSingleton(EnumDaoType.FILE,true);
         try {
             // Invocazione diretta del tuo metodo statico
-            CatalogBean catalog = RentalController2.getCatalog();
+            CatalogBean catalog = RentalController.getCatalog();
 
             System.out.println("✅ Esecuzione completata senza crash!");
             System.out.println("Numero di prodotti caricati nel Bean: " + catalog.getProducts().size());

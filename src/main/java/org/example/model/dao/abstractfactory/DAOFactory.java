@@ -2,7 +2,6 @@ package org.example.model.dao.abstractfactory;
 
 import org.example.model.dao.dbms.DbmsDAOFactory;
 import org.example.model.dao.demo.DemoDAOFactory;
-import org.example.model.dao.file.dao.FileDAOFactory;
 import org.example.model.dao.filejson.dao.FileJsonDAOFactory;
 
 public abstract class DAOFactory {

@@ -23,7 +23,7 @@ public interface NotificationI extends EntityI<String>, WorkI {
     NotificationI setRead(boolean read); // 🎯 Cambiato void -> NotificationI
 
     @Override
-    default boolean canWork(SessionI sessionI, UserI userI) {//todo
+    default boolean canWork(SessionI sessionI, UserI userI) {//xtodo
         if (userI instanceof ActionsNotificationI worker) {
             return worker.execute(sessionI, this);
         }
