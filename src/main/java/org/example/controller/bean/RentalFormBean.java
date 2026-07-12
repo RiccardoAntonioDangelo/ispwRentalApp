@@ -7,10 +7,14 @@ import org.example.model.services.rent.RentI;
 import org.example.util.str.StrApp;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RentalFormBean extends AbstractBean {
+
+    // Define the application's target time zone explicitly
+    private static final ZoneId DEFAULT_ZONE = ZoneId.systemDefault();
 
     private final RentalS rental;
     private String name = "";
@@ -49,7 +53,8 @@ public class RentalFormBean extends AbstractBean {
     }
 
     public static LocalDate getLocalDate() {
-        return LocalDate.now();
+        // Explicitly passed ZoneId
+        return LocalDate.now(DEFAULT_ZONE);
     }
 
     /**
@@ -64,8 +69,9 @@ public class RentalFormBean extends AbstractBean {
             this.phone = (session.getSession().getUser().getPhone() != null) ? session.getSession().getUser().getPhone() : "";
         }
 
-        this.start = LocalDate.now();
-        this.end = LocalDate.now().plusDays(1);
+        // Explicitly passed ZoneId
+        this.start = LocalDate.now(DEFAULT_ZONE);
+        this.end = LocalDate.now(DEFAULT_ZONE).plusDays(1);
 
         return this;
     }
@@ -97,7 +103,8 @@ public class RentalFormBean extends AbstractBean {
             this.setErrorMessage(StrApp.ERR_RENTAL_DATES_REQUIRED);
             return false;
         }
-        if (startData.isBefore(LocalDate.now())) {
+        // Explicitly passed ZoneId
+        if (startData.isBefore(LocalDate.now(DEFAULT_ZONE))) {
             this.setErrorMessage(StrApp.ERR_RENTAL_PAST_DATE);
             return false;
         }
