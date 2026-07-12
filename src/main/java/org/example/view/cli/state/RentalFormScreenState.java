@@ -8,6 +8,7 @@ import org.example.view.cli.context.CliContext;
 
 import java.io.PrintStream;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -208,7 +209,7 @@ public class RentalFormScreenState extends AbstractCliScreen {
             if (durataIn.equalsIgnoreCase("B")) { backCount++; return false; }
             long durata = Long.parseLong(durataIn);
 
-            LocalDate dataInizio = LocalDate.now().plusDays(giorniAInizio);
+            LocalDate dataInizio = LocalDate.now(ZoneId.systemDefault()).plusDays(giorniAInizio);
             rentalForm.setStart(dataInizio);
             rentalForm.setEnd(dataInizio.plusDays(durata));
             return true;
