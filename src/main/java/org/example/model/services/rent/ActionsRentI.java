@@ -5,9 +5,10 @@ import org.example.model.entity.rental.StatusEnum;
 import org.example.model.services.CollectionI;
 import org.example.model.services.session.SessionI;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 public interface ActionsRentI {
-    
+
     /**
      * Inizializza la collezione specifica in base alla chiave fornita.
      */
@@ -50,7 +51,7 @@ public interface ActionsRentI {
         if (rent == null) return false;
         if (rent.getStatus() == StatusEnum.ACTIVE
                 && rent.getEndDate() != null
-                && LocalDate.now().isAfter(rent.getEndDate())) {
+                && LocalDate.now(ZoneId.systemDefault()).isAfter(rent.getEndDate())) {
             rent.complete();
             return true;
         }
@@ -80,7 +81,7 @@ public interface ActionsRentI {
         if(session.getRole() instanceof ActionsClientRentI clientRentI)
             value= clientRentI.cancelClientRent(session,rent);
         if(session.getRole() instanceof ActionsOwnerRentI ownerRentI)//xtodo verifica se sei il vero proprietario
-           value= ownerRentI.cancelOwnerRent(session,rent) || value ;
+            value= ownerRentI.cancelOwnerRent(session,rent) || value ;
         return value;
     }
 }

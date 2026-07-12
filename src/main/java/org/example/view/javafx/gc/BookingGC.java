@@ -12,6 +12,7 @@ import org.example.view.javafx.util.ViewRoute;
 import org.example.controller.bean.ProductBean;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
 public class BookingGC extends GraphicController<BookingGC> {
@@ -56,9 +57,12 @@ public class BookingGC extends GraphicController<BookingGC> {
     public void initialize() {
         initStaticTexts();
 
+        // Specificato ZoneId.systemDefault() per esplicitare il fuso orario
+        ZoneId defaultZone = ZoneId.systemDefault();
+
         // Impostiamo date iniziali di default (Oggi e Domani)
-        startDatePicker.setValue(LocalDate.now());
-        endDatePicker.setValue(LocalDate.now().plusDays(1));
+        startDatePicker.setValue(LocalDate.now(defaultZone));
+        endDatePicker.setValue(LocalDate.now(defaultZone).plusDays(1));
 
         disablePastDates(startDatePicker);
         disableDatesBefore(endDatePicker, startDatePicker.getValue());
@@ -125,7 +129,8 @@ public class BookingGC extends GraphicController<BookingGC> {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-                if (date != null && date.isBefore(LocalDate.now())) {
+                // Specificato ZoneId.systemDefault() anche all'interno della cell factory
+                if (date != null && date.isBefore(LocalDate.now(ZoneId.systemDefault()))) {
                     setDisable(true);
                     setStyle("-fx-background-color: #eeeeee;");
                 }

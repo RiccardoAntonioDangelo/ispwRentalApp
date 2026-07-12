@@ -176,7 +176,7 @@ public class CommandLineController {
         for (int i = 0; i < userRentals.size(); i++) {
             RentalFormBean rental = userRentals.get(i);
             out.printf("[%d] Prodotto ID: %s | Cliente: %s | Proprietario: %s | Stato: %s\n",
-                    i, rental.getProductId(), rental.getEmail(), rental.getOwnerEmail(), rental.getOwnerEmail());//todo
+                    i, rental.getProductId(), rental.getEmail(), rental.getOwnerEmail(), rental.getOwnerEmail());//xtodo
         }
 
         out.print("\nSeleziona l'indice della pratica per effettuare un'azione (-1 per uscire): ");

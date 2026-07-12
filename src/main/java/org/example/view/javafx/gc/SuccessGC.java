@@ -55,7 +55,6 @@ public class SuccessGC extends GraphicController<SuccessGC> {
         if (rentalData == null) return;
 
         // Se l'entità Rental genera già un ID o un codice di richiesta, lo prendiamo da lì.
-        // Se non hai ancora l'ID reale dal DB, puoi generarlo dinamicamente o usare un metodo del bean. todo
         if (rentalData.getRental() != null && rentalData.getRental().getId() != null) {
             requestValueLabel.setText("#" + rentalData.getRental().getId());
         } else {

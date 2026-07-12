@@ -5,6 +5,7 @@ import org.example.model.services.rent.ActionsOwnerRentI;
 import org.example.model.services.rent.RentI;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Objects;
 
 /**
@@ -22,9 +23,9 @@ public abstract class AbstractRental<T extends AbstractRental<T>> implements Ren
     protected LocalDate endDate;
     protected Payment payment;
 
-    public AbstractRental() {}
+    protected AbstractRental() {}
 
-    public AbstractRental(String clientEmail, String clientPhone, String productId, String locate, LocalDate start, LocalDate end) {
+    protected AbstractRental(String clientEmail, String clientPhone, String productId, String locate, LocalDate start, LocalDate end) {
         this.clientEmail = clientEmail;
         this.clientPhone = clientPhone;
         this.productId = productId;
@@ -33,11 +34,11 @@ public abstract class AbstractRental<T extends AbstractRental<T>> implements Ren
         this.locate = locate;
     }
 
-    public AbstractRental(String clientEmail, String ownerEmail, String productId) {
+    protected AbstractRental(String clientEmail, String ownerEmail, String productId) {
         this.clientEmail = clientEmail;
         this.ownerEmail = ownerEmail;
         this.productId = productId;
-        this.startDate = LocalDate.now();
+        this.startDate = LocalDate.now(ZoneId.systemDefault());
     }
 
     public void commitChange() {
@@ -162,6 +163,5 @@ public abstract class AbstractRental<T extends AbstractRental<T>> implements Ren
     }
 
     // Firma astratta per costringere le sottoclassi a implementare la gestione del formato enum
-    public abstract StatusEnum getStatus();
     public abstract T setStatus(StatusEnum status);
 }

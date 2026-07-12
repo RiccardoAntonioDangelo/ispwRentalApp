@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,8 +57,10 @@ class RentalControllerTest {
         ProductBean productBean = new ProductBean(product);
 
         // 3. Setup Date e compilazione del modulo (Allineato a BookingGC)
-        LocalDate start = LocalDate.now().plusDays(1);
-        LocalDate end = LocalDate.now().plusDays(4); // 3 Giorni di differenza
+        // Specificato ZoneId.systemDefault() per evitare warning di Sonar / vulnerabilità di fuso orario
+        ZoneId defaultZone = ZoneId.systemDefault();
+        LocalDate start = LocalDate.now(defaultZone).plusDays(1);
+        LocalDate end = LocalDate.now(defaultZone).plusDays(4); // 3 Giorni di differenza
 
         RentalFormBean rentalForm = new RentalFormBean()
                 .setOwnerEmail(productBean.getOwnerEmail())
