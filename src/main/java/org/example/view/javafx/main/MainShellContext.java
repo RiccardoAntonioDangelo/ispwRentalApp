@@ -42,8 +42,18 @@ public class MainShellContext extends Context {
         // Configurazione delle azioni dei pulsanti dell'header
         header.addActionButton(StrApp.NAV_USER_RENTAL, e -> navigateTo(userRentalsController.updateView()));
         header.addActionButton(StrApp.NAV_REGISTER, e -> navigateTo(registerController));
-        header.addActionButton(StrApp.NAV_LOGIN, e -> navigateTo(loginController));
-        header.addActionButton(StrApp.LOGO_LOGOUT, e -> GraphicAPI.logoutApi(getMemory()));
+        //header.addActionButton(StrApp.NAV_LOGIN, e -> navigateTo(loginController));
+        header.addActionButton(StrApp.LOGO_LOGOUT, e -> GraphicAPI.logoutApi(getMemory() ));
+        header.addActionButtonToggle(
+                () -> {
+                    if ( getMemory() != null &&  getMemory().getUser() != null) {
+                        return  getMemory().getUser(); // Ritorna l'email dell'utente loggato
+                    }
+                    return StrApp.get(StrApp.NAV_LOGIN); // Ritorna "Login" se anonimo
+                },
+                e -> navigateTo(loginController),    // Azione se cliccato in stato "Login"
+                e -> navigateTo(loginController)
+        );
 
     }
 

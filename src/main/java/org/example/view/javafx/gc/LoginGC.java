@@ -56,6 +56,7 @@ public class LoginGC extends GraphicController<LoginGC> {
             return;
         }
         try {
+            GraphicAPI.logoutApi(this.getMainShellContext().getMemory());
             this.getMainShellContext().setMemory(GraphicAPI.loginApi(loginData));
         } catch (AuthenticationException e) {
             this.alert(StrApp.LOGIN_ERROR, null, e.getMessage());

@@ -30,7 +30,7 @@ public interface LoginController {
     /**
      * Esegue il logout rimuovendo la sessione dal registro globale.
      */
-    static void logout(SessionBean sessionBean) {if (sessionBean != null) {SessionManager.closeSession(sessionBean.getSession());}}
+    static void logout(SessionBean sessionBean) {if (sessionBean != null) {SessionManager.closeSession(sessionBean.getSession());sessionBean.logout();}}
 
     /**
      * Verifica se la sessione è ancora valida nel contesto del server.

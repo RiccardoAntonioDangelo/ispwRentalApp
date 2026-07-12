@@ -42,23 +42,24 @@ public class Session implements SessionI {
         return isValid() && this.user.isValid(password);
     }
 
-    public void logout() {
-        this.user = null;
-        this.lazyCollections.clear();
-    }
 
     public boolean execute(WorkI work) {
         return user.execute(this, work);
     }
 
     // --- Getter e Setter ---
-    public String getUserid() { return user.getId(); }
+    public String getUserid() {
+        if(user!=null) return user.getId();
+        return null;
+    }
 
     public User getUser() { return user; }
 
     @Override
     public UserI getRole() {
-        return getUser().getRole();
+        if(getUser()!=null)
+         return getUser().getRole();
+        return null;
     }
 
     public void setUser(User user) {

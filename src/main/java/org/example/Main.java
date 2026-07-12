@@ -9,7 +9,7 @@ import org.example.view.javafx.main.MainShellContext;
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
-       DAOManager.initializeSingleton(EnumDaoType.DEMO,true,true);
+       DAOManager.initializeSingleton(EnumDaoType.FILE,true,true);
        new MainShellContext(stage).show();
        new MainShellContext(new Stage()).show();
 

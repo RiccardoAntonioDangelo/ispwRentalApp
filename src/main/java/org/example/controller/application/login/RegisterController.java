@@ -20,7 +20,7 @@ public interface RegisterController {
          if (AuthenticationController.saveSession(session) ) {
             return new SessionBean(session);
          }else{
-            SessionManager.out(session);
+            SessionManager.closeSession(session);
             throw new RegistrationException("Errore critico durante il salvataggio nel database.");
          }
       } catch (IllegalStateException e) {

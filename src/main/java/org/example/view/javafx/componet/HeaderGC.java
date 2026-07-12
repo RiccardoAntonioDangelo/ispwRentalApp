@@ -13,6 +13,7 @@ import org.example.view.javafx.util.GraphicController;
 import org.example.view.javafx.util.ViewRoute;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class HeaderGC extends GraphicController<HeaderGC> {
 
@@ -83,6 +84,34 @@ public class HeaderGC extends GraphicController<HeaderGC> {
         Button btn = new Button(label);
         btn.getStyleClass().add(Style.BTN_NAV);
         btn.setOnAction(action);
+        headerButtonsContainer.getChildren().addFirst(btn);
+    }
+    /**
+     * 🆕 Aggiunge un bottone toggle dinamico che scambia testo e azione in modo incrociato.
+     * Puoi chiamarlo quante volte vuoi per aggiungere più bottoni toggle nel container.
+     */
+    public void addActionButtonToggle(Supplier<String> textProvider,
+                                      EventHandler<ActionEvent> loginAction,
+                                      EventHandler<ActionEvent> logoutAction) {
+        Button btn = new Button(textProvider.get());
+        btn.getStyleClass().add(Style.BTN_NAV);
+
+        // Salviamo il textProvider nel bottone stesso tramite UserData per poterlo rinfrescare in updateView()
+        btn.setUserData(textProvider);
+
+        btn.setOnAction(e -> {
+            String currentText = btn.getText();
+
+            // Logica incrociata basata sul testo corrente del bottone
+            if (currentText.equals(StrApp.get(StrApp.NAV_LOGIN))) {
+                loginAction.handle(e);
+            } else {
+                logoutAction.handle(e);
+            }
+
+            // Aggiorna immediatamente il testo dopo il click
+            btn.setText(textProvider.get());
+        });
         headerButtonsContainer.getChildren().addFirst(btn);
     }
 

@@ -34,16 +34,9 @@ public class SessionManager implements SingletonI {
     /**
      * Rimuove la sessione dalla cache e invoca il metodo logout sulla sessione stessa.
      */
-    public static void out(Session session) {
-        if (session != null && session.getId() != null) {
-            activeSessions.remove(session.getId());
-            session.logout();
-        }
-    }
-    public static void closeSession(Session session) {if (session != null) {removeSession(session.getId());session.logout();}}
+    public static void closeSession(Session session) {if (session != null && session.getId() != null) {removeSession(session.getId());}}
     public static void removeSession(String email) {
-        Session session = activeSessions.remove(email);
-        if (session != null) {session.logout();}
+        activeSessions.remove(email);
     }
     public static boolean isUserLoggedIn(String email) {return email != null && activeSessions.containsKey(email);}
     public static Optional<Session> getActiveSession(String email) {return Optional.ofNullable(activeSessions.get(email));}
@@ -51,15 +44,6 @@ public class SessionManager implements SingletonI {
         if (session == null || session.getId() == null) return false;
         Session stored = activeSessions.get(session.getId());
         return session.equals(stored) && session.isValid();
-    }
-    /**
-     * Chiude forzatamente una sessione tramite ID.
-     */
-    public static void killSession(String id) {
-        Session session = activeSessions.remove(id);
-        if (session != null) {
-            session.logout();
-        }
     }
 
     public static int getActiveSessionsCount() {

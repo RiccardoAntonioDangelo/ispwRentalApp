@@ -15,7 +15,10 @@ public class SessionBean implements Serializable {
         this.session=session;
     }
 
-    public String getUser(){return session.getUserid();}
+    public String getUser(){
+        if(session!=null) return session.getUserid();
+        return null;
+    }
 
 
     public Session getSession() {return session;}
@@ -25,6 +28,6 @@ public class SessionBean implements Serializable {
     }
 
     public void logout() {
-        session.logout();
+        session=new Session();
     }
 }

@@ -140,11 +140,10 @@ public class RegisterGC extends GraphicController<RegisterGC> {
             return;
         }
         try {
+            GraphicAPI.logoutApi(this.getMainShellContext().getMemory());
             this.getMainShellContext().setMemory(GraphicAPI.registerApi(registerData));
         } catch (AuthenticationException e) {
             this.alert(StrApp.SIGNUP_ERROR, null, e.getMessage());
-            //TODO DEBUG
-            throw new RuntimeException(e);
         }
         this.goBack();
     }
