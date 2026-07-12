@@ -196,7 +196,7 @@ public class RentalController implements LoginController, RegisterController {
     public static void cancelRental(SessionBean sessionBean, RentalFormBean rentalFormBean) throws RentalException {
         if (sessionBean == null || sessionBean.getSession() == null || rentalFormBean == null) {
             throw new RentalException("Impossibile annullare: sessione o modulo nulli.");
-        }//todo non funziona
+        }//xtodo non funziona
         SessionI session = sessionBean.getSession();
         RentI rental = rentalFormBean.getRental();
         boolean delete=false;

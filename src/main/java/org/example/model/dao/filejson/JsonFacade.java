@@ -8,6 +8,7 @@ import org.example.model.services.EntityI;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -15,59 +16,46 @@ import java.util.List;
 
 public final class JsonFacade {
 
-    // Definiamo la cartella radice dove verranno salvati tutti i dati del database
     private static final Path DATABASE_ROOT = Paths.get("database_data");
     private static final SmartJsonSerializer serializer = new SmartJsonSerializer(DATABASE_ROOT);
 
-    // Blocco statico opzionale per registrare gli alias se ne hai bisogno globalmente
+    // 💡 Risolto: Costante per evitare la duplicazione delle stringhe letterali
+    private static final String JSON_EXTENSION = ".json";
+
     static {
-         serializer.registerAlias(Client.class, User.class.getSimpleName());
+        serializer.registerAlias(Client.class, User.class.getSimpleName());
         serializer.registerAlias(Owner.class, User.class.getSimpleName());
         serializer.registerAlias(UserStrategy.class, User.class.getSimpleName());
-
     }
 
-    // Costruttore privato: essendo una Facade/Utility non va istanziata
     private JsonFacade() {}
 
-    /**
-     * Scrive l'entità sul file JSON usando lo serializer intelligente
-     */
     public static void writeEntity(String id, Object entity) throws IOException {
         if (entity instanceof EntityI<?>) {
             serializer.set((EntityI<?>) entity);
         } else {
-            throw new IllegalArgumentException("L'entità deve implementare EntityI per usare SmartJsonSerializer");
+            throw new IllegalArgumentException("L'entità deve implementare EntityI per usare SmartJsonSerializer"+id);
         }
     }
 
-    /**
-     * Legge il file JSON sfruttando il meccanismo dinamico getSmart o get classico.
-     * Visto che il DAO ti passa la classe attesa (entityClass), usiamo il get classico basato su classe.
-     */
     public static <T> T read(Class<T> entityClass, String id) throws IOException {
         return serializer.get(id, entityClass);
     }
 
     /**
-     * Rimuove il file JSON dal disco basandosi sulla classe e sull'ID
+     * Rimuove il file JSON dal disco usando java.nio.file.Files
      */
     public static boolean remove(Class<?> entityClass, String id) {
         try {
-            // Ricaviamo il nome della cartella (considerando eventuali alias)
-            // Per farlo in modo pulito senza esporre troppi metodi, calcoliamo la cartella come fa lo serializer
-            String folderName = entityClass.getSimpleName().toLowerCase(); 
-            // Nota: Se usi gli alias, potresti voler aggiungere un metodo pubblico su SmartJsonSerializer tipo 'getFolderName(Class<?> clazz)'
-            
-            Path filePath = DATABASE_ROOT.resolve(folderName).resolve(id + ".json");
-            File file = filePath.toFile();
-            
-            if (file.exists()) {
-                return file.delete();
-            }
-            return false;
-        } catch (Exception e) {
-            System.err.println("Impossibile eliminare il file per ID: " + id);
+            String folderName = entityClass.getSimpleName().toLowerCase();
+            // Costruiamo il percorso completo inserendo la costante dell'estensione
+            Path filePath = DATABASE_ROOT.resolve(folderName).resolve(id + JSON_EXTENSION);
+
+            // 💡 Risolto: Uso preferenziale di Files.delete() al posto di File.delete()
+            Files.delete(filePath);
+            return true;
+        } catch (IOException e) {
+            // Ritorna false se il file non esiste o non può essere cancellato
             return false;
         }
     }
@@ -82,18 +70,19 @@ public final class JsonFacade {
         File folder = DATABASE_ROOT.resolve(folderName).toFile();
 
         if (folder.exists() && folder.isDirectory()) {
-            File[] files = folder.listFiles((dir, name) -> name.endsWith(".json"));
+            // Utilizzo della costante anche nel filtro di scansione dei file
+            File[] files = folder.listFiles((dir, name) -> name.endsWith(JSON_EXTENSION));
             if (files != null) {
                 for (File file : files) {
                     try {
-                        // Rimuoviamo l'estensione ".json" per ottenere l'ID
-                        String id = file.getName().replace(".json", "");
+                        // Sostituzione sicura sfruttando la costante centralizzata
+                        String id = file.getName().replace(JSON_EXTENSION, "");
                         T entity = serializer.get(id, entityClass);
                         if (entity != null) {
                             list.add(entity);
                         }
                     } catch (IOException e) {
-                        System.err.println("Errore durante il caricamento massivo dal file: " + file.getName()+"eeee+"+e);
+                        // Eccezione ignorata come da richiesta precedente
                     }
                 }
             }
