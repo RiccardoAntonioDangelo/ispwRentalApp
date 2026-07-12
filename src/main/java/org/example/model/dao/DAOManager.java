@@ -7,6 +7,7 @@ import org.example.util.singleton.SingletonI;
 
 public class DAOManager implements SingletonI {
     private final DAOFactory activeFactory;
+    private static boolean sigleton=false;
     // Costruttore privato
     private DAOManager(EnumDaoType type, boolean useCache) {
         DAOFactory realFactory = DAOFactory.getDAOFactory(type);
@@ -14,12 +15,16 @@ public class DAOManager implements SingletonI {
         this.activeFactory=new ObserverDAOFactoryProxy(realFactory);
 
     }
+    public static boolean isInitialize() {
+        return sigleton;
+    }
+
 
     /**
      * Inizializzazione globale. Qui decidi UNA VOLTA per tutto il ciclo di vita
      * dell'app se vuoi la cache attiva.
      */
-    public static void initializeSingleton(EnumDaoType type, boolean useCache) {SingletonI.registerSingleton(new DAOManager(type, useCache));}
+    public static void initializeSingleton(EnumDaoType type, boolean useCache) {SingletonI.registerSingleton(new DAOManager(type, useCache));sigleton=true;}
     public static void initializeSingleton(EnumDaoType type, boolean useCache, boolean demoData) {
         initializeSingleton(type,useCache);
         if (demoData)DemoDataInitializer.loadDemoData();
