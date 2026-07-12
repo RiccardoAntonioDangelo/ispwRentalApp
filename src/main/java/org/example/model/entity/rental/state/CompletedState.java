@@ -3,6 +3,13 @@ package org.example.model.entity.rental.state;
 import org.example.model.entity.rental.StatusEnum;
 
 public class CompletedState implements RentalState {
+
+    @Override
+    public boolean canBeCancelled() { return true; }
+
+    @Override
+    public StatusEnum getStatusEnum() { return StatusEnum.COMPLETED; }
+
     @Override
     public void approve(RentalS rental) {
         throw new IllegalStateException("Impossibile approvare: il noleggio è già terminato e completato.");
@@ -28,9 +35,4 @@ public class CompletedState implements RentalState {
         rental.setInternalState(new CancelledState());
     }
 
-    @Override
-    public boolean canBeCancelled() { return true; }
-
-    @Override
-    public StatusEnum getStatusEnum() { return StatusEnum.COMPLETED; }
 }

@@ -8,10 +8,7 @@ public class CancelledState implements RentalState {
         throw new IllegalStateException("Impossibile approvare: il noleggio è stato annullato.");
     }
 
-    @Override
-    public void reject(RentalS rental) {
-        throw new IllegalStateException("Impossibile rifiutare: il noleggio risulta già annullato.");
-    }
+
 
     @Override
     public void activate(RentalS rental) {
@@ -21,6 +18,10 @@ public class CancelledState implements RentalState {
     @Override
     public void complete(RentalS rental) {
         throw new IllegalStateException("Impossibile completare: il noleggio è stato precedentemente annullato.");
+    }
+    @Override
+    public void reject(RentalS rental) {
+        throw new IllegalStateException("Impossibile rifiutare: il noleggio risulta già annullato.");
     }
 
     @Override

@@ -19,10 +19,7 @@ public class ApprovedState implements RentalState {
         rental.setInternalState(new ActiveState());
     }
 
-    @Override
-    public void complete(RentalS rental) {
-        throw new IllegalStateException("Impossibile completare: il noleggio deve prima essere attivato.");
-    }
+
 
     @Override
     public void cancel(RentalS rental) {
@@ -30,6 +27,10 @@ public class ApprovedState implements RentalState {
         rental.setInternalState(new CancelledState());
     }
 
+    @Override
+    public void complete(RentalS rental) {
+        throw new IllegalStateException("Impossibile completare: il noleggio deve prima essere attivato.");
+    }
     @Override
     public boolean canBeCancelled() { return true; }
 

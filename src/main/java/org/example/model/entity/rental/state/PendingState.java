@@ -16,11 +16,6 @@ public class PendingState implements RentalState {
     }
 
     @Override
-    public void activate(RentalS rental) {
-        throw new IllegalStateException("Impossibile attivare: il noleggio deve prima essere approvato.");
-    }
-
-    @Override
     public void complete(RentalS rental) {
         throw new IllegalStateException("Impossibile completare: il noleggio è ancora in attesa di approvazione.");
     }
@@ -29,6 +24,11 @@ public class PendingState implements RentalState {
     public void cancel(RentalS rental) {
         // Transizione valida: il cliente annulla la richiesta prima dell'approvazione
         rental.setInternalState(new CancelledState());
+    }
+
+    @Override
+    public void activate(RentalS rental) {
+        throw new IllegalStateException("Impossibile attivare: il noleggio deve prima essere approvato.");
     }
 
     @Override
