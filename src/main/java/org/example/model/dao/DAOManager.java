@@ -7,12 +7,12 @@ import org.example.util.singleton.SingletonI;
 
 public class DAOManager implements SingletonI {
     private final DAOFactory activeFactory;
-
     // Costruttore privato
     private DAOManager(EnumDaoType type, boolean useCache) {
         DAOFactory realFactory = DAOFactory.getDAOFactory(type);
         if (useCache) {realFactory = new CachedDAOFactoryProxy(realFactory);}
         this.activeFactory=new ObserverDAOFactoryProxy(realFactory);
+
     }
 
     /**
@@ -20,6 +20,11 @@ public class DAOManager implements SingletonI {
      * dell'app se vuoi la cache attiva.
      */
     public static void initializeSingleton(EnumDaoType type, boolean useCache) {SingletonI.registerSingleton(new DAOManager(type, useCache));}
+    public static void initializeSingleton(EnumDaoType type, boolean useCache, boolean demoData) {
+        initializeSingleton(type,useCache);
+        if (demoData)DemoDataInitializer.loadDemoData();
+    }
+
     public static DAOManager getSingletonInstance() {return SingletonI.getSingleton(DAOManager.class);}
 
 

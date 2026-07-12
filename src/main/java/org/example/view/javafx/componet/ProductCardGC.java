@@ -72,11 +72,11 @@ public class ProductCardGC extends AbstractComponentGC<ProductCardGC> {
             String value = detail.replace(prefix, "");
 
             switch (prefix) {
+                case StrApp.PREFIX_TOTAL_PRICE -> midElements.add(StrApp.LABEL_WEEKLY_PRICE_PREFIX + value);
+                case StrApp.PREFIX_SUBTITLE -> midElements.add(value);
                 case StrApp.PREFIX_TITLE -> titleLabel.setText(value);
                 case StrApp.PREFIX_DAILY_PRICE -> priceValueLabel.setText(value);
-                case StrApp.PREFIX_SUBTITLE -> midElements.add(value);
                 case StrApp.PREFIX_DISCOUNT -> midElements.add(StrApp.LABEL_DISCOUNT_PREFIX + value);
-                case StrApp.PREFIX_TOTAL_PRICE -> midElements.add(StrApp.LABEL_WEEKLY_PRICE_PREFIX + value);
                 default -> { /* Ignora prefissi non impattanti sul layout compatto della card */ }
             }
         }

@@ -16,6 +16,16 @@ public class CompletedState implements RentalState {
     }
 
     @Override
+    public void complete(RentalS rental) {
+        throw new IllegalStateException("Il noleggio è già stato completato.");
+    }
+
+    @Override
+    public void cancel(RentalS rental) {
+        rental.setInternalState(new CancelledState());
+    }
+
+    @Override
     public void reject(RentalS rental) {
         throw new IllegalStateException("Impossibile rifiutare: il noleggio si è già concluso.");
     }
@@ -25,14 +35,5 @@ public class CompletedState implements RentalState {
         throw new IllegalStateException("Impossibile attivare: il noleggio è storico e già completato.");
     }
 
-    @Override
-    public void complete(RentalS rental) {
-        throw new IllegalStateException("Il noleggio è già stato completato.");
-    }
-
-    @Override
-    public void cancel(RentalS rental) {
-        rental.setInternalState(new CancelledState());
-    }
 
 }
