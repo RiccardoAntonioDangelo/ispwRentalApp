@@ -90,7 +90,6 @@ public class RegisterGC extends GraphicController<RegisterGC> {
         roleNodesMap.clear();
 
         for (String[] role : roles) {
-            // Risolto il TODO: Utilizzo delle costanti semantiche al posto degli indici numerici hardcoded
             String roleId   = role[INDEX_ROLE_ID];
             String roleName = role[INDEX_ROLE_NAME];
             String roleDesc = role[INDEX_ROLE_DESC];

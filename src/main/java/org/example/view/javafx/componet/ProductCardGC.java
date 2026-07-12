@@ -72,11 +72,14 @@ public class ProductCardGC extends AbstractComponentGC<ProductCardGC> {
             String value = detail.replace(prefix, "");
 
             switch (prefix) {
+                case StrApp.PREFIX_TITLE -> titleLabel.setText(value);
+
                 case StrApp.PREFIX_TOTAL_PRICE -> midElements.add(StrApp.LABEL_WEEKLY_PRICE_PREFIX + value);
                 case StrApp.PREFIX_SUBTITLE -> midElements.add(value);
-                case StrApp.PREFIX_TITLE -> titleLabel.setText(value);
-                case StrApp.PREFIX_DAILY_PRICE -> priceValueLabel.setText(value);
+
                 case StrApp.PREFIX_DISCOUNT -> midElements.add(StrApp.LABEL_DISCOUNT_PREFIX + value);
+                case StrApp.PREFIX_DAILY_PRICE -> priceValueLabel.setText(value);
+
                 default -> { /* Ignora prefissi non impattanti sul layout compatto della card */ }
             }
         }
@@ -98,13 +101,14 @@ public class ProductCardGC extends AbstractComponentGC<ProductCardGC> {
         subtitleLabel.getStyleClass().removeAll(STYLE_SIZE_13, "text-accent", "text-lo");
 
         if (bean.getProduct().isAvailable()) {
-            subtitleLabel.setText(StrApp.PRODUCT_STATUS_AVAILABLE);
             subtitleLabel.getStyleClass().addAll(STYLE_SIZE_13, "text-accent");
+            subtitleLabel.setText(StrApp.PRODUCT_STATUS_AVAILABLE);
             cardRoot.setOpacity(1.0);
         } else {
             subtitleLabel.setText(StrApp.PRODUCT_STATUS_UNAVAILABLE);
-            subtitleLabel.getStyleClass().addAll(STYLE_SIZE_13, "text-lo");
             cardRoot.setOpacity(0.6);
+            subtitleLabel.getStyleClass().addAll(STYLE_SIZE_13, "text-lo");
+
         }
     }
 
@@ -115,17 +119,20 @@ public class ProductCardGC extends AbstractComponentGC<ProductCardGC> {
         if (detail.startsWith(StrApp.PREFIX_TITLE)) {
             return StrApp.PREFIX_TITLE;
         }
+
         if (detail.startsWith(StrApp.PREFIX_SUBTITLE)) {
             return StrApp.PREFIX_SUBTITLE;
         }
+
         if (detail.startsWith(StrApp.PREFIX_DAILY_PRICE)) {
             return StrApp.PREFIX_DAILY_PRICE;
         }
-        if (detail.startsWith(StrApp.PREFIX_DISCOUNT)) {
-            return StrApp.PREFIX_DISCOUNT;
-        }
+
         if (detail.startsWith(StrApp.PREFIX_TOTAL_PRICE)) {
             return StrApp.PREFIX_TOTAL_PRICE;
+        }
+        if (detail.startsWith(StrApp.PREFIX_DISCOUNT)) {
+            return StrApp.PREFIX_DISCOUNT;
         }
         return "";
     }
