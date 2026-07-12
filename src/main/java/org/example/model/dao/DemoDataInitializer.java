@@ -68,13 +68,12 @@ public final class DemoDataInitializer {
      * 🆕 Metodo unico parametrizzato per centralizzare la creazione dei prodotti.
      */
     private static Product createProduct(String title, double price, String category, String description,
-                                         boolean isAvailable, String imageUrl,
+                                         boolean isAvailable,
                                          List<String> specifications, List<String> conditions) {
         Product p = new Product(OWNER_EMAIL, title, price);
         p.setCategory(category);
         p.setDescription(description);
         p.setAvailable(isAvailable);
-        p.setImageUrl(imageUrl);
         p.setSpecifications(new ArrayList<>(specifications));
         p.setRentalConditions(new ArrayList<>(conditions));
         return p;
@@ -87,7 +86,6 @@ public final class DemoDataInitializer {
                 "Informatica",
                 "Laptop professionale per sviluppo software, montaggio video e grafica. Stato impeccabile.",
                 true,
-                "macbook_pro.png",
                 Arrays.asList("CPU Apple M3 Pro 12-core", "36GB Memoria Unificata", "512GB SSD ultra-rapido", "Display Liquid Retina XDR 16\""),
                 Arrays.asList("Ritiro a mano previo controllo congiunto", "Deposito cauzionale di 200€ all'atto del ritiro", "Restituzione comprensiva di alimentatore originale e custodia")
         );
@@ -100,7 +98,6 @@ public final class DemoDataInitializer {
                 "Fotografia",
                 "Corpo macchina mirrorless full-frame da 33 MP. Ideale per eventi e content creation.",
                 true,
-                "sony_a7iv.png",
                 Arrays.asList("Sensore Full-Frame Exmor R da 33 MP", "Registrazione video 4K 60p", "Autofocus Real-time in tempo reale per occhi", "Doppio slot per schede SD/CFexpress"),
                 Arrays.asList("Fornito con 2 batterie cariche e caricabatterie", "Obiettivo non incluso (noleggiabile separatamente)", "È richiesta la firma del modulo di responsabilità per danni")
         );
@@ -113,7 +110,6 @@ public final class DemoDataInitializer {
                 "Mobilità",
                 "Monopattino elettrico con doppia sospensione. Perfetto per muoversi in centro città.",
                 false,
-                "xiaomi_ultra.png",
                 Arrays.asList("Autonomia fino a 70 km", "Motore con potenza massima di 940W", "Sistema di doppia sospensione anteriore e posteriore", "Pneumatici da 10 pollici autosigillanti"),
                 Arrays.asList("Uso obbligatorio del casco (fornito gratuitamente su richiesta)", "Riconsegna con batteria caricata ad almeno il 20%", "Noleggio consentito solo a maggiorenni")
         );
