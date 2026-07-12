@@ -14,6 +14,7 @@ module org.example {
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.core;
+    // Cancella o commenta queste due righe se il pacchetto "actors" in sé non contiene classi (.java)
     // Modulo per LocalDate / LocalDateTime
     requires com.fasterxml.jackson.datatype.jsr310;
 
@@ -60,8 +61,6 @@ module org.example {
     exports org.example.util.str;
     opens org.example.util.str to javafx.fxml;
 
-    exports org.example.view.javafx.main.test;
-    opens org.example.view.javafx.main.test to javafx.fxml, javafx.graphics;
 
     exports org.example.view.javafx.main;
     opens org.example.view.javafx.main to javafx.fxml;
